@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="calendar.css" rel="stylesheet" />
+    <script
+      src="https://kit.fontawesome.com/f6d300ae13.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>New Prayer Calendar</title>
+  </head>
+  <body onload="getPrayerTimes()">
+    <div class="side-nav">
+      <div
+        class="nav-buttons-holder active-nav"
+        style="cursor: pointer"
+        onclick="window.location='#';"
+      >
+        <i class="fa-solid fa-kaaba"></i>
+        <a class="nav-buttons-text" style="text-decoration: none">
+          <p>Prayer times</p>
+        </a>
+      </div>
+      <div
+        class="nav-buttons-holder"
+        style="cursor: pointer"
+        onclick="window.location='#';"
+      >
+        <i class="fa-solid fa-calendar-days"></i>
+        <a class="nav-buttons-text" href="#">
+          <p>Calendar</p>
+        </a>
+      </div>
+      <div
+        class="nav-buttons-holder"
+        style="cursor: pointer"
+        onclick="window.location='#';"
+      >
+        <i class="fa-solid fa-book-quran"></i>
+        <a class="nav-buttons-text" href="#">
+          <p>Halal</p>
+        </a>
+      </div>
+      <div
+        class="nav-buttons-holder"
+        style="cursor: pointer"
+        onclick="window.location='#';"
+      >
+        <i class="fa-solid fa-cloud-moon"></i>
+        <a class="nav-buttons-text" href="#">
+          <p>Dua</p>
+        </a>
+      </div>
+    </div>
+    
+    <div class="name-search-container">
+      <p class="page-name">Islamic Prayer</p>
+      <div class="search-bar-container">
+        <div class="choose-city">
+            <input type="text" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown()" id="myInput" onkeyup="filterFunction()">
+            <div id="myDropdown" class="dropdown-content">
+    
+    <a>Auckland</a>
+    <a>Wellington</a>
+    <a>Christchurch</a>
+    <a>Hamilton</a>
+    <a>Tauranga</a>
+    <a>Napier</a>
+    <a>Dunedin</a>
+    <a>Palmerston North</a>
+    <a>Nelson</a>
+    </div>
+    </div>
+
+
+
+
+        
+        <a class="search-icon">
+          <i class="fa-solid fa-location-crosshairs"></i>
+        </a>
+      
+        
+      </div>  
+    </div>
+
+    <div class="main-container">
+      <div class="top-current-date-container">
+        <a></a>
+        <a></a>
+        <div class="current-date">
+          <i class="fa-solid fa-calendar-days"></i>
+          <p class="today-text">Today</p>
+          <p>6</p>
+          <p>Dhul Qaadah</p>
+          <p>1443</p>
+          <p>30</p>
+          <p>January</p>
+          <p>2023</p>
+        </div>
+      </div>
+
+      <div class="location-method-container">
+        <strong><p id="current-location">Dunedin Prayer times</p></strong>
+        <p>Method: The Muslim world league</p>
+        <a class="change-method-icon">Change method icon</a>
+        <p class="method-details">Dawn is 180 degrees, Isha is 170 degrees</p>
+      </div>
+
+      <div class="prayer-times">
+        <div class="prayer-times-containers fajr-container">
+          <p class="fajr-name">Fajr</p>
+          <p id="fajr-time">06:23 PM</p>
+        </div>
+        <div class="prayer-times-containers sunrise-container">
+          <p class="sunrise-name">Sunrise</p>
+          <p id="sunrise-time">06:23 PM</p>
+        </div>
+        <div class="prayer-times-containers dhuhr-container">
+          <p class="dhuhr-name">Dhuhr</p>
+          <p id="dhuhr-time">06:23 PM</p>
+        </div>
+        <div class="prayer-times-containers asr-container">
+          <p class="asr-name">Asr</p>
+          <p id="asr-time">06:23 PM</p>
+        </div>
+        <div class="prayer-times-containers maghrib-container">
+          <p class="maghrib-name">Maghrib</p>
+          <p id="maghrib-time">06:23 PM</p>
+        </div>
+        <div class="prayer-times-containers isha-container">
+          <p class="isha-name">Isha</p>
+          <p id="isha-time">06:23 PM</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="calendar.js"></script>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
+* {
+  box-sizing: border-box !important;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--light-blue);
+  --light-blue: #f2f9ff;
+  --gray: #5d5d5f;
+  --light-gray: #f6f6f6;
+  --white: #ffffff;
+  --green: #008c29;
+  --light-green: #edf7ef;
+  --border-radius: 1rem;
+  color: var(--gray);
+}
+body {
+  width: 80%;
+  margin: 2rem 0 0 2rem;
+}
+.main-container {
+  margin: 0 auto;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* background-image: url(background.png); */
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 75%,
+      rgb(255, 255, 255) 100%
+    ),
+    url(background.jpg);
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  background-size: cover;
+  gap: 2rem;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--white);
+  width: 10%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20vh 0;
+  gap: 1rem;
+}
+.side-nav a,
+.side-nav i {
+  text-decoration: none;
+  color: var(--gray);
+  font-size: 1rem;
+}
+.side-nav i {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  opacity: 0.6;
+}
+.side-nav a {
+  opacity: 0.6;
+}
+.active-nav i,
+.active-nav a {
+  opacity: 1;
+  color: var(--green);
+}
+.active-nav {
+  background-color: var(--light-green);
+}
+
+.nav-buttons-holder {
+  width: 85%;
+  height: 24%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+}
+.active-nav:has {
+  background-color: red;
+}
+
+.page-name {
+  font-weight: bold;
+  font-size: 2rem;
+  color: var(--green);
+}
+/* search bar */
+.name-search-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.search-bar-container {
+  display: flex;
+  background: var(--white);
+  height: 50px;
+  border-radius: 40px;
+  padding: 10px;
+}
+.search-bar-container:hover > .search-bar {
+  padding: 0 30px;
+  text-decoration: none;
+  opacity: 1;
+}
+.search-bar-container:hover > .search-icon {
+  background: none;
+  color: var(--green);
+  text-decoration: none;
+  opacity: 1;
+}
+.search-bar-container:visited > .search-icon {
+  text-decoration: none;
+}
+/* search button */
+
+.search-icon {
+  padding-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  text-decoration: none;
+  opacity: 0.5;
+}
+.search-icon > i {
+  font-size: 25px;
+}
+.search-bar {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  padding-left: 20px;
+  color: var(--gray);
+  transition: 0.4s;
+  line-height: 40px;
+  width: 300px;
+  opacity: 0.5;
+}
+
+.dropdown {
+  /* position: relative;
+    display: inline-block; */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+  min-width: 325px;
+  border-radius: var(--border-radius);
+  z-index: 1;
+  margin-top: 3rem;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--light-blue);
+  border-radius: var(--border-radius);
+}
+
+.show {
+  display: block;
+}
+
+.location-method-container {
+  flex-grow: 1;
+}
+
+.top-current-date-container {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--white);
+}
+
+.current-date {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.5fr;
+  text-align: right;
+}
+.today-text {
+  grid-column: span 2;
+  color: var(--white);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.location-method-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  text-align: center;
+}
+
+.prayer-times {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1rem;
+
+  padding: 0.5rem;
+  border-radius: 1.4rem;
+  text-align: center;
+  background: var(--light-gray);
+}
+.prayer-times-containers {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+  background-color: white;
+  border-radius: var(--border-radius);
+}
+.prayer-times-containers p:nth-child(1) {
+  font-size: 2rem;
+}
