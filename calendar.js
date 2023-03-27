@@ -125,3 +125,34 @@ function closeModal(modal){
   modal.classList.remove('modal-active')
   overlay.classList.remove('modal-active')
 }
+
+
+
+
+// document.getElementById("dua").classList.add("active-nav");
+
+
+const selectors = ['#mainContainer', '#secondMainContainer', '#thirdMainContainer', '#fourthMainContainer'];
+
+const options = {
+  rootMargin: '0px',
+  threshold: 0
+};
+
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      console.log(`Container ${selectors.indexOf('#' + entry.target.id) + 1} is in view!`);
+      console.log('#' + entry.target.id + 'Nav');
+      document.getElementById(entry.target.id+'Nav').classList.add("active-nav");
+    }
+    else{
+      document.getElementById(entry.target.id+'Nav').classList.remove("active-nav");
+    }
+  });
+}, options);
+
+selectors.forEach(selector => {
+  const container = document.querySelector(selector);
+  observer.observe(container);
+});
