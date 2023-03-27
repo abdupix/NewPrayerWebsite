@@ -12,131 +12,172 @@
     <title>New Prayer Calendar</title>
   </head>
   <body onload="getPrayerTimes()">
-    <div class="side-nav">
-      <div
-        class="nav-buttons-holder active-nav"
-        style="cursor: pointer"
-        onclick="window.location='#';"
-      >
-        <i class="fa-solid fa-kaaba"></i>
-        <a class="nav-buttons-text" style="text-decoration: none">
-          <p>Prayer times</p>
-        </a>
-      </div>
-      <div
-        class="nav-buttons-holder"
-        style="cursor: pointer"
-        onclick="window.location='#';"
-      >
-        <i class="fa-solid fa-calendar-days"></i>
-        <a class="nav-buttons-text" href="#">
-          <p>Calendar</p>
-        </a>
-      </div>
-      <div
-        class="nav-buttons-holder"
-        style="cursor: pointer"
-        onclick="window.location='#';"
-      >
-        <i class="fa-solid fa-book-quran"></i>
-        <a class="nav-buttons-text" href="#">
-          <p>Halal</p>
-        </a>
-      </div>
-      <div
-        class="nav-buttons-holder"
-        style="cursor: pointer"
-        onclick="window.location='#';"
-      >
-        <i class="fa-solid fa-cloud-moon"></i>
-        <a class="nav-buttons-text" href="#">
-          <p>Dua</p>
-        </a>
-      </div>
-    </div>
+
+    <!-- <button data-modal-target="#modal">OPen settings MOdel</button> -->
+<div class="modal" id="modal">
+  <div class="modal-header"> 
+<div class="modal-title">Eaxample Modal</div>
+<button data-close-button class="close-button">&times;</button>
+  </div>
+  <div class="modal-body">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, voluptatum, accusamus neque adipisci similique velit explicabo iure, praesentium voluptatibus quo cupiditate soluta dolor? Debitis soluta nobis aspernatur corporis nesciunt unde recusandae minus veniam similique, quod illo ex totam expedita blanditiis delectus tempore dolor dolores perferendis, nulla harum repellat iure odit? Nesciunt fugit nam pariatur corrupti accusantium natus soluta doloremque, ad debitis eum esse facilis assumenda. Itaque architecto non iste laboriosam quaerat possimus quis velit, adipisci inventore neque id tempore obcaecati!
+  </div>
+  </div>
+  <div id="modalOverlay"></div>
+
+
+        <div id="snapScrollContainer">
+        <div class="side-nav">
+          <div
+            class="nav-buttons-holder active-nav"
+            style="cursor: pointer"
+            onclick="window.location='#mainContainer';"
+          >
+            <i class="fa-solid fa-kaaba"></i>
+            <a class="nav-buttons-text" style="text-decoration: none">
+              <p>Prayer times</p>
+            </a>
+          </div>
+          <div
+            class="nav-buttons-holder"
+            style="cursor: pointer"
+            onclick="window.location='#secondMainContainer';"
+          >
+            <i class="fa-solid fa-cloud-moon"></i>
+            <a class="nav-buttons-text" href="#">
+              <p>Dua</p>
+            </a>
+          </div>
+          <div
+            class="nav-buttons-holder"
+            style="cursor: pointer"
+            onclick="window.location='#thirdMainContainer';"
+          >
+            <i class="fa-solid fa-calendar-days"></i>
+            <a class="nav-buttons-text" href="#">
+              <p>Calendar</p>
+            </a>
+          </div>
+          <div
+            class="nav-buttons-holder"
+            style="cursor: pointer"
+            onclick="window.location='#fourthMainContainer';"
+          >
+            <i class="fa-solid fa-book-quran"></i>
+            <a class="nav-buttons-text" href="#">
+              <p>Halal</p>
+            </a>
+          </div>
+          
+        </div>
     
-    <div class="name-search-container">
-      <p class="page-name">Islamic Prayer</p>
-      <div class="search-bar-container">
-        <div class="choose-city">
-            <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown()" id="myInput" onkeyup="filterFunction()">
-            <div id="myDropdown" class="dropdown-content">
+        <div class="name-search-container">
+          <p class="page-name">Islamic Prayer</p>
+          <div class="search-bar-container">
+            <div class="choose-city">
+              <input
+                type="text"
+                autocomplete="off"
+                class="search-bar"
+                placeholder="Search for a city"
+                onFocus="cityDropDown()"
+                id="myInput"
+                onkeyup="filterFunction()"
+              />
+              <div id="myDropdown" class="dropdown-content">
+                <a>Auckland</a>
+                <a>Wellington</a>
+                <a>Christchurch</a>
+                <a>Hamilton</a>
+                <a>Tauranga</a>
+                <a>Napier</a>
+                <a>Dunedin</a>
+                <a>Palmerston North</a>
+                <a>Nelson</a>
+              </div>
+            </div>
     
-    <a>Auckland</a>
-    <a>Wellington</a>
-    <a>Christchurch</a>
-    <a>Hamilton</a>
-    <a>Tauranga</a>
-    <a>Napier</a>
-    <a>Dunedin</a>
-    <a>Palmerston North</a>
-    <a>Nelson</a>
-    </div>
-    </div>
+            <a class="search-icon">
+              <i class="fa-solid fa-location-crosshairs"></i>
+            </a>
+          </div>
+        </div>
 
 
-
-
+        <div id="container">
+            <div id="mainContainer" class="main-container">
+                <div class="top-current-date-container">
+                    <a></a>
+                    <a></a>
+                    <div class="current-date">
+                      <i class="fa-solid fa-calendar-days"></i>
+                      <p class="today-text">Today</p>
+                      <p>6</p>
+                      <p>Dhul Qaadah</p>
+                      <p>1443</p>
+                      <p>30</p>
+                      <p>January</p>
+                      <p>2023</p>
+                    </div>
+                  </div>
+            
+                  <div class="location-method-container">
+                    <strong><p id="current-location">Dunedin Prayer times</p></strong>
+                    <strong><p>Method: ISNA <i data-modal-target="#modal" class="fa-solid fa-sliders"></i></p></strong>
+            
+                    <p class="method-details">Dawn is 180 degrees, Isha is 170 degrees</p>
+                  </div>
+            
+                  <div class="prayer-times">
+                    <div class="prayer-times-containers fajr-container">
+                      <p class="fajr-name">Fajr</p>
+                      <p id="fajr-time">06:23 PM</p>
+                    </div>
+                    <div class="prayer-times-containers sunrise-container">
+                      <p class="sunrise-name">Sunrise</p>
+                      <p id="sunrise-time">06:23 PM</p>
+                    </div>
+                    <div class="prayer-times-containers dhuhr-container">
+                      <p class="dhuhr-name">Dhuhr</p>
+                      <p id="dhuhr-time">06:23 PM</p>
+                    </div>
+                    <div class="prayer-times-containers asr-container">
+                      <p class="asr-name">Asr</p>
+                      <p id="asr-time">06:23 PM</p>
+                    </div>
+                    <div class="prayer-times-containers maghrib-container">
+                      <p class="maghrib-name">Maghrib</p>
+                      <p id="maghrib-time">06:23 PM</p>
+                    </div>
+                    <div class="prayer-times-containers isha-container">
+                      <p class="isha-name">Isha</p>
+                      <p id="isha-time">06:23 PM</p>
+                    </div>
+                  </div>
         
-        <a class="search-icon">
-          <i class="fa-solid fa-location-crosshairs"></i>
-        </a>
-      
-        
-      </div>  
+
+            </div>
+            <div id="secondMainContainer" class="second-main-container">
+                <h1>Dua & Hadith to help you through out the day!
+                </h1><br>
+                <h3>Coming very soon...</h3>
+            </div>
+            <div id="thirdMainContainer" class="third-main-container">
+                <h1>Directory of Halal places to eat and products!
+                </h1><br>
+                <h3>Also coming very soon...</h3>
+            </div>
+            <div id="fourthMainContainer" class="fourth-main-container">
+                <h1>The calendar and prayer times to help you plan ahead!
+                </h1><br>
+                <h3>Once again, also coming very soon...</h3>
+            </div>
+        </div>
+     
+    
+        </div>
+
     </div>
-
-    <div class="main-container">
-      <div class="top-current-date-container">
-        <a></a>
-        <a></a>
-        <div class="current-date">
-          <i class="fa-solid fa-calendar-days"></i>
-          <p class="today-text">Today</p>
-          <p>6</p>
-          <p>Dhul Qaadah</p>
-          <p>1443</p>
-          <p>30</p>
-          <p>January</p>
-          <p>2023</p>
-        </div>
-      </div>
-
-      <div class="location-method-container">
-        <strong><p id="current-location">Dunedin Prayer times</p></strong>
-        <p>Method: ISNA</p>
-        <i class="fa-solid fa-sliders"></i>
-        <p class="method-details">Dawn is 180 degrees, Isha is 170 degrees</p>
-      </div>
-
-      <div class="prayer-times">
-        <div class="prayer-times-containers fajr-container">
-          <p class="fajr-name">Fajr</p>
-          <p id="fajr-time">06:23 PM</p>
-        </div>
-        <div class="prayer-times-containers sunrise-container">
-          <p class="sunrise-name">Sunrise</p>
-          <p id="sunrise-time">06:23 PM</p>
-        </div>
-        <div class="prayer-times-containers dhuhr-container">
-          <p class="dhuhr-name">Dhuhr</p>
-          <p id="dhuhr-time">06:23 PM</p>
-        </div>
-        <div class="prayer-times-containers asr-container">
-          <p class="asr-name">Asr</p>
-          <p id="asr-time">06:23 PM</p>
-        </div>
-        <div class="prayer-times-containers maghrib-container">
-          <p class="maghrib-name">Maghrib</p>
-          <p id="maghrib-time">06:23 PM</p>
-        </div>
-        <div class="prayer-times-containers isha-container">
-          <p class="isha-name">Isha</p>
-          <p id="isha-time">06:23 PM</p>
-        </div>
-      </div>
-    </div>
-
-    <script src="calendar.js"></script>
+        <script src="calendar.js"></script>
   </body>
 </html>
