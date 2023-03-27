@@ -45,7 +45,7 @@ dropDownOptions.addEventListener("click", function (event) {
     hideDropdown();
     document.getElementById("current-location").innerHTML =
       currentCity + " Prayer Times";
-      getPrayerTimes();
+    getPrayerTimes();
     return currentCity;
   } else {
     console.log("location not set");
@@ -58,101 +58,119 @@ function getPrayerTimes() {
     year +
     "/" +
     monthOfYear +
-    "?city="+
-    currentCity+
+    "?city=" +
+    currentCity +
     "&country=New Zealand&method=2";
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      const timings = data.data[dayOfMonth].timings;
+      const times = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
 
-      // document.getElementById("englishDateNumber").innerHTML = todayEnglishDate;
-      const fajrTime = data.data[dayOfMonth].timings.Fajr;
-      const sunsireTime = data.data[dayOfMonth].timings.Sunrise;
-      const dhuhrTime = data.data[dayOfMonth].timings.Dhuhr;
-      const asrTime = data.data[dayOfMonth].timings.Asr;
-      const maghribTime = data.data[dayOfMonth].timings.Maghrib;
-      const ishaTime = data.data[dayOfMonth].timings.Isha;
-      console.log(fajrTime);
-      document.getElementById("fajr-time").innerHTML = fajrTime;
-      document.getElementById("sunrise-time").innerHTML = sunsireTime;
-      document.getElementById("dhuhr-time").innerHTML = dhuhrTime;
-      document.getElementById("asr-time").innerHTML = asrTime;
-      document.getElementById("maghrib-time").innerHTML = maghribTime;
-      document.getElementById("isha-time").innerHTML = ishaTime;
-      console.log(currentCity);
+      times.forEach((time) => {
+        const timeElement = document.getElementById(
+          `${time.toLowerCase()}-time`
+        );
+        timeElement.innerHTML = timings[time].replace(" (NZDT)", "");
+      });
+
+      const currentTime = new Date();
+      const currentHour = currentTime.getHours();
+      let nextPrayerTime = "";
+      let minDiff = Infinity;
+      times.forEach((time) => {
+        const prayerTime = timings[time].split(":")[0];
+        const diff = prayerTime - currentHour;
+        if (diff >= 0 && diff < minDiff) {
+          minDiff = diff;
+          nextPrayerTime = time;
+
+          
+        const nextPrayerClass = document.getElementById(nextPrayerTime + "Container");
+        nextPrayerClass.classList.add("next-prayer");
+        }
+      });
+      console.log(`Next closest prayer time is ${nextPrayerTime}`);
+
+      nextPrayerIn();
     })
     .catch((error) => {
       console.error(error);
     });
 }
 
+function nextPrayerIn() {}
 
+const openModalButtons = document.querySelectorAll("[data-modal-target]");
+const closeModalButtons = document.querySelectorAll("[data-close-button]");
+const overlay = document.getElementById("modalOverlay");
 
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
-const overlay = document.getElementById('modalOverlay')
-
-openModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = document.querySelector(button.dataset.modalTarget)
-    openModal(modal)
-  })
-})
-modalOverlay.addEventListener('click', () => {
-  const modals = document.querySelectorAll('.modal.modal-active');
-  modals.forEach(modal => {
+openModalButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = document.querySelector(button.dataset.modalTarget);
+    openModal(modal);
+  });
+});
+modalOverlay.addEventListener("click", () => {
+  const modals = document.querySelectorAll(".modal.modal-active");
+  modals.forEach((modal) => {
     closeModal(modal);
-  })
-})
+  });
+});
 
+closeModalButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = button.closest(".modal");
+    closeModal(modal);
+  });
+});
 
-closeModalButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const modal = button.closest('.modal')
-    closeModal(modal)
-  })
-})
-
-function openModal(modal){
-  if(modal == null) return
-  modal.classList.add('modal-active')
-  overlay.classList.add('modal-active')
+function openModal(modal) {
+  if (modal == null) return;
+  modal.classList.add("modal-active");
+  overlay.classList.add("modal-active");
 }
 
-function closeModal(modal){
-  if(modal == null) return
-  modal.classList.remove('modal-active')
-  overlay.classList.remove('modal-active')
+function closeModal(modal) {
+  if (modal == null) return;
+  modal.classList.remove("modal-active");
+  overlay.classList.remove("modal-active");
 }
-
-
-
 
 // document.getElementById("dua").classList.add("active-nav");
 
-
-const selectors = ['#mainContainer', '#secondMainContainer', '#thirdMainContainer', '#fourthMainContainer'];
+const selectors = [
+  "#mainContainer",
+  "#secondMainContainer",
+  "#thirdMainContainer",
+  "#fourthMainContainer",
+];
 
 const options = {
-  rootMargin: '0px',
-  threshold: 0
+  rootMargin: "0px",
+  threshold: 0,
 };
 
 const observer = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      console.log(`Container ${selectors.indexOf('#' + entry.target.id) + 1} is in view!`);
-      console.log('#' + entry.target.id + 'Nav');
-      document.getElementById(entry.target.id+'Nav').classList.add("active-nav");
-    }
-    else{
-      document.getElementById(entry.target.id+'Nav').classList.remove("active-nav");
+      console.log(
+        `Container ${selectors.indexOf("#" + entry.target.id) + 1} is in view!`
+      );
+      console.log("#" + entry.target.id + "Nav");
+      document
+        .getElementById(entry.target.id + "Nav")
+        .classList.add("active-nav");
+    } else {
+      document
+        .getElementById(entry.target.id + "Nav")
+        .classList.remove("active-nav");
     }
   });
 }, options);
 
-selectors.forEach(selector => {
+selectors.forEach((selector) => {
   const container = document.querySelector(selector);
   observer.observe(container);
 });

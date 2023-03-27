@@ -39,22 +39,25 @@ body {
 
 .main-container {
     display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 1rem;
-  background-color: lightgreen;
-  background-image: linear-gradient(
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: lightgreen;
+    background-image: linear-gradient(
     rgba(255, 255, 255, 0) 0%,
     rgba(255, 255, 255, 1) 75%,
     rgb(255, 255, 255) 100%
   ),
   url(background.jpg);
-background-size: cover;
-background-position: center;
-background-size: cover;
+    background-size: cover;
+    background-position:bottom;
+    background-size: cover;
+    /* filter: hue-rotate(90deg); */
 }
-
+/* .main-container p{
+  filter: hue-rotate(-90deg);
+} */
 
 .main-container,
 .second-main-container,
@@ -144,7 +147,11 @@ background-size: cover;
 .page-name {
   font-weight: bold;
   font-size: 2rem;
+  color: var(--gray)
+}
+.page-name:before{
   color: var(--green);
+  content: "Hikmah";
 }
 /* search bar */
 .name-search-container {
@@ -303,9 +310,14 @@ background-size: cover;
 }
 .prayer-times-containers p:nth-child(1) {
   font-size: 1.5rem;
+  font-weight: bolder;
 }
 
 
+.next-prayer{
+  box-shadow: inset 0px 0px 0px 2px var(--green), 0px 0px 10px 5px rgba(0,140,41,0.1);
+ 
+}
 
 
 
