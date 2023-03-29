@@ -86,9 +86,13 @@ function getPrayerTimes() {
           minDiff = diff;
           nextPrayerTime = time;
 
-          
+          console.log(nextPrayerTime)
         const nextPrayerClass = document.getElementById(nextPrayerTime + "Container");
+        console.log(nextPrayerClass)
         nextPrayerClass.classList.add("next-prayer");
+
+        // const MainPrayerNextContainer = document.getElementById("mainContainer");
+        // MainPrayerNextContainer.classList.add("main-container-"+ nextPrayerTime.toLowerCase());
         }
       });
       console.log(`Next closest prayer time is ${nextPrayerTime}`);
