@@ -77,34 +77,49 @@ function getPrayerTimes() {
 
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
-      let nextPrayerTime = "";
+      nextPrayerTime = "";
       let minDiff = Infinity;
       times.forEach((time) => {
-        const prayerTime = timings[time].split(":")[0];
+        prayerTime = timings[time].split(":")[0];
         const diff = prayerTime - currentHour;
         if (diff >= 0 && diff < minDiff) {
           minDiff = diff;
           nextPrayerTime = time;
 
-          console.log(nextPrayerTime)
-        const nextPrayerClass = document.getElementById(nextPrayerTime + "Container");
-        console.log(nextPrayerClass)
-        nextPrayerClass.classList.add("next-prayer");
-
-        // const MainPrayerNextContainer = document.getElementById("mainContainer");
-        // MainPrayerNextContainer.classList.add("main-container-"+ nextPrayerTime.toLowerCase());
+          console.log(nextPrayerTime);
         }
       });
-      console.log(`Next closest prayer time is ${nextPrayerTime}`);
+      modifyNextPrayer();
 
-      nextPrayerIn();
+      
     })
     .catch((error) => {
       console.error(error);
     });
 }
+function modifyNextPrayer() {
+  //if nextPrayerTime is nothing, set its value to Fajr
+  if (nextPrayerTime == "") {
+    nextPrayerTime = "Fajr";
+  }
+  console.log(`Next closest prayer time is ${nextPrayerTime}`);
+  const nextPrayerClass = document.getElementById(nextPrayerTime + "Container");
+  console.log(nextPrayerClass);
+  nextPrayerClass.classList.add("next-prayer");
+  const MainPrayerNextContainer = document.getElementById("mainContainer");
+  MainPrayerNextContainer.classList.add(
+    "main-container-" + nextPrayerTime.toLowerCase()
+  );
+  nextPrayerIn();
+}
 
-function nextPrayerIn() {}
+function nextPrayerIn() {
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
+      const currentMin = currentTime.getMinutes();
+      
+
+}
 
 const openModalButtons = document.querySelectorAll("[data-modal-target]");
 const closeModalButtons = document.querySelectorAll("[data-close-button]");
