@@ -23,58 +23,67 @@ html {
 }
 body {
   width: 85%;
-  margin: 2rem 0 0 2rem;
+  margin: 2rem 0 0 2rem!important;
+  top:0;
 }
-
+#snapScrollContainer{
+  top:0;
+}
 #container {
   scroll-snap-type: y mandatory;
   margin: 30px auto 0;
   overflow-y: scroll;
   height: 80vh;
+
 }
-#container::-webkit-scrollbar{
+#container::-webkit-scrollbar {
   display: none;
 }
 
 .main-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem;
 
-     background-image:linear-gradient(
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 75%,
-    rgb(255, 255, 255) 100%
-  ),
-  url(background.jpg);
-    background-size: cover;
-    background-position:bottom;
-    background-size: cover;
-
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 75%,
+      rgb(255, 255, 255) 100%
+    ),
+    url(background.jpg);
+  background-size: cover;
+  background-position: bottom;
+  background-size: cover;
 }
-.main-container-fajr{
+.next-prayer {
+  box-shadow: inset 0px 0px 0px 2px var(--green),
+    0px 0px 10px 5px rgba(0, 140, 41, 0.1);
+}
+
+.main-container-fajr {
   filter: hue-rotate(-20deg) saturate(150%);
 }
-.main-container-sunrise{
+.main-container-sunrise {
   filter: hue-rotate(0deg) saturate(120%);
 }
-.main-container-dhuhr{
+.main-container-dhuhr {
   filter: hue-rotate(-180deg) saturate(100%);
 }
-.main-container-asr{
+
+
+
+.main-container-asr {
   filter: hue-rotate(-160deg) saturate(80%);
 }
-.main-container-maghrib{
+.main-container-maghrib {
   filter: hue-rotate(-10deg) saturate(40%);
 }
-.main-container-isha{
+.main-container-isha {
   filter: hue-rotate(-150deg) saturate(160%);
 }
-.main-container p{
-  filter: hue-rotate(0deg) saturate(100%)!important;
-}
+
 
 .main-container,
 .second-main-container,
@@ -85,29 +94,29 @@ body {
   scroll-snap-align: center;
   border-radius: var(--border-radius);
 }
-.second-main-container, .third-main-container, .fourth-main-container {
-    text-align: center;
-    margin:auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 5rem auto;
-  padding: 1rem; 
+.second-main-container,
+.third-main-container,
+.fourth-main-container {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5rem auto;
+  padding: 1rem;
 }
-.second-main-container{
-    background-color: var(--light-green);
-    margin: 5rem auto;
+.second-main-container {
+  background-color: var(--light-green);
+  margin: 5rem auto;
 }
-.third-main-container{
-
-    background-color: rgb(247, 96, 96);
-    margin: 5rem auto;
+.third-main-container {
+  background-color: rgb(247, 96, 96);
+  margin: 5rem auto;
 }
-.fourth-main-container{
-    background-color: rgb(19, 142, 200);
-    margin: 5rem auto;
+.fourth-main-container {
+  background-color: rgb(19, 142, 200);
+  margin: 5rem auto;
 }
-
 
 .side-nav {
   display: flex;
@@ -163,9 +172,9 @@ body {
 .page-name {
   font-weight: bold;
   font-size: 2rem;
-  color: var(--gray)
+  color: var(--gray);
 }
-.page-name:before{
+.page-name:before {
   color: var(--green);
   content: "Hikmah";
 }
@@ -181,7 +190,7 @@ body {
 .search-bar-container {
   display: flex;
   background: var(--white);
-  height: 50px;
+  height: 40px;
   border-radius: 40px;
   padding: 10px;
   align-items: center;
@@ -227,8 +236,6 @@ body {
   width: 300px;
   opacity: 0.5;
 }
-
-
 
 .dropdown-content {
   display: none;
@@ -300,7 +307,7 @@ body {
   color: var(--green);
   font-weight: bold;
   font-size: 2rem;
-  line-height: 4rem;
+  line-height: 3.5rem;
 }
 
 .prayer-times {
@@ -308,7 +315,7 @@ body {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 1rem;
 
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 1.4rem;
   text-align: center;
   background: var(--light-gray);
@@ -320,8 +327,8 @@ body {
   padding: 1rem;
   background-color: white;
   border-radius: var(--border-radius);
-  gap:1rem;
-  padding:3rem 0;
+  gap: 1rem;
+  padding: 3rem 0;
 }
 .prayer-times-containers p:nth-child(1) {
   font-size: 1.5rem;
@@ -329,145 +336,171 @@ body {
 }
 
 
-.next-prayer{
-  box-shadow: inset 0px 0px 0px 2px var(--green), 0px 0px 10px 5px rgba(0,140,41,0.1);
- 
-}
 
-
-
-.modal{
+.modal {
   position: fixed;
   top: 50%;
   transform: translate(-240%, -50%) scale(0.5);
-  border:1px solid var(--gray);
+  border: 1px solid var(--gray);
   border-radius: var(--border-radius);
-  z-index:10;
+  z-index: 10;
   background-color: var(--light-green);
-  width:85%;
-  height:80vh;
-  padding:2rem;
+  width: 85%;
+  height: 80vh;
+  padding: 2rem;
 }
-.modal.modal-active{ 
-  transform: translate(0, -50% ) scale(1);
+.modal.modal-active {
+  transform: translate(0, -50%) scale(1);
   transition: transform 0.3s ease-in-out;
   pointer-events: all;
 }
 
-.modal-header{
-  padding-bottom:1rem;
-  margin-bottom:1rem;
+.modal-header {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid var(--gray);
 }
-.modal-header .modal-title{
+.modal-header .modal-title {
   font-size: 1.25rem;
   font-weight: bold;
 }
-.modal-header .close-button{
+.modal-header .close-button {
   font-size: 1.5rem;
-  border:none;
-  outline:none;
-  background:none;
+  border: none;
+  outline: none;
+  background: none;
   font-weight: bold;
   cursor: pointer;
 }
-#modalOverlay{
-  position:fixed;
-  opacity:0;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background-color: rgba(0,0,0,0.5);
+#modalOverlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 3;
   pointer-events: none;
-  
 }
-#modalOverlay.modal-active{
+#modalOverlay.modal-active {
   pointer-events: all;
-  opacity:1;
+  opacity: 1;
   transition: all 0.5s ease;
 }
 
 @media screen and (max-width: 758px) {
-
 }
-  
 
-@media screen and (max-width: 425px){
-  body{
-    margin:0;
-    width:100vw;
-    background-image:linear-gradient(
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 1) 75%,
-      rgb(255, 255, 255) 100%
-    ),
-    url(background.jpg);
+@media screen and (max-width: 425px) {
+  body {
+    margin: 0!important;
+    width: 100vw;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 1) 75%,
+        rgb(255, 255, 255) 100%
+      ),
+      url(background.jpg);
     background-size: cover;
-    background-position:bottom;
+    background-position: bottom;
     background-size: cover;
   }
-  #container{
-    margin:0;
+  #container {
+    margin: 0;
+    height:85vh
   }
+  .main-container,
+.second-main-container,
+.third-main-container,
+.fourth-main-container {
+  scroll-snap-align: none;
+  padding:0 auto;
+  margin-bottom:3rem;
+  margin-top:2rem;
+  height:80vh;
+}
+.fourth-main-container{
+  margin-bottom:200px;
+}
+
   .name-search-container {
     flex-direction: column;
-    margin-bottom:10px;
-
+    margin-bottom: 10px;
+    margin-top:0;
   }
 
-.side-nav{
-flex-direction: row;
-width:100%;
-height:48px;
-top:auto;
-bottom:0;
-z-index:2;
-padding:0;
-}
-.main-container{
-  gap: 0;
-  margin: 0;
-  height:auto;
-  background-image: none;
+  .side-nav {
+    flex-direction: row;
+    align-items: center;
+    width: calc(100% - 20px);
+    height: 62px;
+    top: auto;
+    bottom: 0;
+    z-index: 2;
+    padding: 0;
+    margin:10px;
+    border-radius: var(--border-radius);
   
-}
-.prayer-times{
-  grid-template-columns: repeat(1, 1fr);
-  gap:5px;
-}
-.prayer-times-containers{
-  flex-direction: row;
-  padding:10px 20px;
-  justify-content:space-between;
-  align-items: center;
-}
-.top-current-date-container{
-  justify-content: center;
-}
-.current-date{
-  padding:0.5rem 1rem;
-  text-align: center;
-}
-.location-method-container{
-  flex-grow:0;
-  padding-bottom: 5px;
+  }
+  .side-nav i{
+    font-size: 1.2rem;
+    margin:0;
+  }
+  .nav-buttons-holder{
+    gap:0;
+    height:150%;
+
+    border-radius: 50%;
+  }
+  .main-container {
+    gap: 0;
+    margin: 0;
+    height: auto;
+    background-image: none;
+    padding-top:0;
+  }
+  .prayer-times {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 5px;
+  }
+  .prayer-times-containers {
+    flex-direction: row;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-current-date-container {
+    justify-content: center;
+  }
+  .current-date {
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+  .location-method-container {
+    flex-grow: 0;
+    padding-bottom: 5px;
+  }
+  .method-details{
+    display: none;
+  }
+
+  .page-name {
+    padding-bottom: 5px;
+  }
+
+  p.today-text,
+  .current-date i {
+    display: none;
+  }
+  .current-date p:nth-of-type(2),
+  .current-date p:nth-of-type(3),
+  .current-date p:nth-of-type(4) {
+    color: var(--green);
+    font-weight: bold;
+  }
 }
 
-.page-name{
-  padding-bottom:5px;
-}
-
-p.today-text, .current-date i{
-  display:none;
-}
-.current-date p:nth-of-type(2), .current-date p:nth-of-type(3), .current-date p:nth-of-type(4){
-  color: var(--green);
-  font-weight: bold;
-
-};
-}

@@ -1,4 +1,5 @@
 let currentCity = "Dunedin";
+let allTime;
 
 const date = new Date();
 var dayOfMonth = date.getDate();
@@ -66,6 +67,7 @@ function getPrayerTimes() {
     .then((data) => {
       console.log(data);
       const timings = data.data[dayOfMonth].timings;
+      allTime = data;
       const times = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
 
       times.forEach((time) => {
@@ -90,12 +92,19 @@ function getPrayerTimes() {
         }
       });
       modifyNextPrayer();
-
+      populateTable();
+      
       
     })
     .catch((error) => {
       console.error(error);
     });
+
+
+
+}
+function populateTable(){
+  console.log(allTime);
 }
 function modifyNextPrayer() {
   //if nextPrayerTime is nothing, set its value to Fajr
@@ -193,3 +202,4 @@ selectors.forEach((selector) => {
   const container = document.querySelector(selector);
   observer.observe(container);
 });
+
