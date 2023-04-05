@@ -170,9 +170,9 @@ function closeModal(modal) {
 
 const selectors = [
   "#mainContainer",
-  "#secondMainContainer",
-  "#thirdMainContainer",
-  "#fourthMainContainer",
+  "#hadithMainContainer",
+  "#calendarMainContainer",
+  "#halaalDirectoryMainContainer",
 ];
 
 const options = {
