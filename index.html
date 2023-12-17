@@ -10,6 +10,7 @@
       crossorigin="anonymous"
     ></script>
     <title>New Prayer Calendar</title>
+    <link rel="icon" type="image/x-icon" href="LogoGreenSVG.ico">
 
 
   </head>
@@ -18,11 +19,38 @@
     <!-- <button data-modal-target="#modal">OPen settings MOdel</button> -->
 <div class="modal" id="modal">
   <div class="modal-header"> 
-<div class="modal-title">Eaxample Modal</div>
+<div class="modal-title">Settings</div>
 <button data-close-button class="close-button">&times;</button>
   </div>
   <div class="modal-body">
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae, voluptatum, accusamus neque adipisci similique velit explicabo iure, praesentium voluptatibus quo cupiditate soluta dolor? Debitis soluta nobis aspernatur corporis nesciunt unde recusandae minus veniam similique, quod illo ex totam expedita blanditiis delectus tempore dolor dolores perferendis, nulla harum repellat iure odit? Nesciunt fugit nam pariatur corrupti accusantium natus soluta doloremque, ad debitis eum esse facilis assumenda. Itaque architecto non iste laboriosam quaerat possimus quis velit, adipisci inventore neque id tempore obcaecati!
+    <!-- change method -->
+    <label><strong>Method of time calculation:</strong></label><br>
+    
+      <select class="minimal-method">
+        <option value="1">Muslim World League</option>
+        <option value="2">Islamic Society of North America (ISNA) - (Default)</option>
+        <option value="3">Egyptian General Authority of Survey</option>
+        <option value="4">Umm Al-Qura University, Makkah</option>
+        <option value="5">University of Islamic Sciences, Karachi</option>
+        <option value="6">Institute of Geophysics, University of Tehran</option>
+        <option value="7">Shia Ithna-Ashari, Leva Institute, Qum</option>
+        <option value="8">Gulf Region</option>
+        <option value="9">Kuwait</option>
+        <option value="10">Qatar</option>
+        <option value="11">Majlis Ugama Islam Singapura, Singapore</option>
+        <option value="12">Union Organization islamic de France</option>
+        <option value="13">Diyanet İşleri Başkanlığı, Turkey</option>
+        <option value="14">Spiritual Administration of Muslims of Russia</option>
+        <option value="15">Moonsighting Committee</option>
+      </select>
+  
+    
+    
+
+
+    <!-- search for location -->
+    <br>
+    <button>Click here to change location.</button>
   </div>
   </div>
   <div id="modalOverlay"></div>
@@ -40,30 +68,30 @@
               <p>Prayer</p>
             </a>
           </div>
-          <div id="hadithMainContainerNav"
+          <div id="secondMainContainerNav"
             class="nav-buttons-holder" 
             style="cursor: pointer"
-            onclick="window.location='#hadithMainContainer';"
+            onclick="window.location='#secondMainContainer';"
           >
             <i class="fa-solid fa-cloud-moon"></i>
             <a class="nav-buttons-text" href="#">
               <p>Dua</p>
             </a>
           </div>
-          <div id="halaalDirectoryMainContainerNav"
+          <div id="thirdMainContainerNav"
             class="nav-buttons-holder" 
             style="cursor: pointer"
-            onclick="window.location='#calendarMainContainer';"
+            onclick="window.location='#thirdMainContainer';"
           >
             <i class="fa-solid fa-calendar-days"></i>
             <a class="nav-buttons-text" href="#">
               <p>Calendar</p>
             </a>
           </div>
-          <div id="calendarMainContainerNav"
+          <div id="fourthMainContainerNav"
             class="nav-buttons-holder"
             style="cursor: pointer"
-            onclick="window.location='#halaalDirectoryMainContainer';"
+            onclick="window.location='#fourthMainContainer';"
           >
             <i class="fa-solid fa-book-quran"></i>
             <a class="nav-buttons-text" href="#">
@@ -114,12 +142,12 @@
                     <div class="current-date">
                       <i class="fa-solid fa-calendar-days"></i>
                       <p class="today-text">Today</p>
-                      <p>6</p>
-                      <p>Dhul Qaadah</p>
-                      <p>1443</p>
-                      <p>30</p>
-                      <p>January</p>
-                      <p>2023</p>
+                      <p id="current-hijri-day"></p>
+                      <p id="current-hijri-month"></p>
+                      <p id="current-hijri-year"></p>
+                      <p id="current-gregorian-day"></p>
+                      <p id="current-gregorian-month"></p>
+                      <p id="current-gregorian-year"></p>
                     </div>
                   </div>
             
@@ -127,7 +155,7 @@
                     <strong><p id="current-location">Dunedin Prayer times</p></strong>
                     <strong><p>Method: ISNA <i data-modal-target="#modal" class="fa-solid fa-sliders"></i></p></strong>
             
-                    <p class="method-details">Dawn is 180 degrees, Isha is 170 degrees</p>
+                    <p class="method-details">Fajr is 15 degrees & Isha is 15 degrees.</p>
                   </div>
             
                   <div class="prayer-times">
@@ -159,20 +187,22 @@
         
 
             </div>
-            <div id="hadithMainContainer" class="second-main-container">
+            <div id="secondMainContainer" class="second-main-container">
                 <h1>Dua & Hadith to help you through out the day!
                 </h1><br>
                 <h3>Coming very soon...</h3>
+                
             </div>
-            <div id="halaalDirectoryMainContainer" class="fourth-main-container">
-                <h1>The calendar and prayer times to help you plan ahead!
-                </h1><br>
-                <h3>Once again, also coming very soon...</h3>
-            </div>
-            <div id="calendarMainContainer" class="third-main-container">
+            <div id="thirdMainContainer" class="third-main-container">
                 <h1>Directory of Halal places to eat and products!
                 </h1><br>
                 <h3>Also coming very soon...</h3>
+            </div>
+            <div id="fourthMainContainer" class="fourth-main-container">
+                <h1>The calendar and prayer times to help you plan ahead!
+                </h1><br>
+                <h3>Once again, also coming very soon...</h3>
+                
             </div>
         </div>
      

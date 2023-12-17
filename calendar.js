@@ -8,8 +8,8 @@ var monthOfYear = date.getMonth() + 1;
 console.log(monthOfYear);
 var year = date.getFullYear();
 console.log(year);
-var forApi =
-  year + "/" + monthOfYear + "?address=Dunedin&method=2" + dayOfMonth;
+// var forApi =
+//   year + "/" + monthOfYear + "?address=Dunedin&method=2" + dayOfMonth;
 
 // names of all cities of nz in an array
 function cityDropDown() {
@@ -38,7 +38,7 @@ function filterFunction() {
     }
   }
 }
-
+function getCurrentCity(){
 var dropDownOptions = document.getElementById("myDropdown");
 dropDownOptions.addEventListener("click", function (event) {
   if (event.target.tagName === "A") {
@@ -52,6 +52,7 @@ dropDownOptions.addEventListener("click", function (event) {
     console.log("location not set");
   }
 });
+}
 
 function getPrayerTimes() {
   const PrayerTime =
@@ -69,7 +70,6 @@ function getPrayerTimes() {
       const timings = data.data[dayOfMonth].timings;
       allTime = data;
       const times = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
       times.forEach((time) => {
         const timeElement = document.getElementById(
           `${time.toLowerCase()}-time`
@@ -91,6 +91,21 @@ function getPrayerTimes() {
           console.log(nextPrayerTime);
         }
       });
+      //add current hijri dates to top right and english dates
+      var currentHijriDay = data.data[dayOfMonth].date.hijri.day;
+      document.getElementById("current-hijri-day").innerHTML = currentHijriDay;
+      var currentHijriMonth = data.data[dayOfMonth].date.hijri.month.en;
+      document.getElementById("current-hijri-month").innerHTML = currentHijriMonth;
+      var currentHijriYear = data.data[dayOfMonth].date.hijri.year;
+      document.getElementById("current-hijri-year").innerHTML = currentHijriYear;
+      document.getElementById("current-gregorian-day").innerHTML = dayOfMonth;
+      var GegorianMonthName = date.toLocaleString('default', { month: 'long' });
+      document.getElementById("current-gregorian-month").innerHTML = GegorianMonthName;
+      document.getElementById("current-gregorian-year").innerHTML = year;
+
+      //current method settings
+      
+
       modifyNextPrayer();
       populateTable();
       
@@ -101,8 +116,10 @@ function getPrayerTimes() {
     });
 
 
-
 }
+
+
+
 function populateTable(){
   console.log(allTime);
 }
@@ -129,7 +146,7 @@ function nextPrayerIn() {
       
 
 }
-
+//for settings modal
 const openModalButtons = document.querySelectorAll("[data-modal-target]");
 const closeModalButtons = document.querySelectorAll("[data-close-button]");
 const overlay = document.getElementById("modalOverlay");
@@ -170,9 +187,9 @@ function closeModal(modal) {
 
 const selectors = [
   "#mainContainer",
-  "#hadithMainContainer",
-  "#calendarMainContainer",
-  "#halaalDirectoryMainContainer",
+  "#secondMainContainer",
+  "#thirdMainContainer",
+  "#fourthMainContainer",
 ];
 
 const options = {
