@@ -1,4 +1,3 @@
-let currentCity = "Dunedin";
 let allTime;
 //create a function that checks if there is a current city saved in local storage
 
@@ -40,13 +39,10 @@ function filterFunction() {
 function getSavedCity(){
   localStorage.setItem("currentCity", currentCity);
   console.log("Current city saved to local storage: "+ currentCity);
-  if (localStorage.getItem("currentCity") !== null) {
-    currentCity = localStorage.getItem("currentCity");
-  }
-  else{
-    currentCity = "Dunedin";
-  }
-  console.log("Local Current city is: "+ currentCity);
+// check what is in the currentCity local storage, and then set the current city to that value
+  currentCity = localStorage.getItem("currentCity");
+  console.log("Local Current city is: from getSavedCity"+ currentCity);
+  return currentCity;
   getPrayerTimes()
   }
   
