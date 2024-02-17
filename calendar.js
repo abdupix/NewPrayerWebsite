@@ -60,6 +60,8 @@ dropDownOptions.addEventListener("click", function (event) {
       currentCity + " Prayer Times";
     getPrayerTimes();
     console.log("Current city set to:"+ currentCity);
+    currentCity = localStorage.getItem("currentCity");
+    console.log("Local Current city is: from getCurrentCIty"+ currentCity);
     return currentCity;
   } else {
     console.log("location not set");
