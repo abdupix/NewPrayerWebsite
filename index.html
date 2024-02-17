@@ -14,7 +14,7 @@
 
 
   </head>
-  <body onload=" getSavedCity()">
+  <body onload="getSavedCityAndMethod()">
     <!-- getPrayerTimes(), -->
 
     <!-- <button data-modal-target="#modal">OPen settings MOdel</button> -->
@@ -27,9 +27,9 @@
     <!-- change method -->
     <label><strong>Method of time calculation:</strong></label><br>
     
-      <select class="minimal-method">
+      <select class="minimal-method" id="method-select" default onfocus="getMethod()">
         <option value="1">Muslim World League</option>
-        <option value="2">Islamic Society of North America (ISNA) - (Default)</option>
+        <option value="2" selected>Islamic Society of North America (ISNA) - (Default)</option>
         <option value="3">Egyptian General Authority of Survey</option>
         <option value="4">Umm Al-Qura University, Makkah</option>
         <option value="5">University of Islamic Sciences, Karachi</option>
@@ -49,9 +49,7 @@
     
 
 
-    <!-- search for location -->
-    <br>
-    <button>Click here to change location.</button>
+  
   </div>
   </div>
   <div id="modalOverlay"></div>
@@ -66,7 +64,7 @@
           >
             <i class="fa-solid fa-kaaba"></i>
             <a class="nav-buttons-text" style="text-decoration: none">
-              <p>Prayer</p>
+              <a>Prayer</a>
             </a>
           </div>
           <div id="secondMainContainerNav"
@@ -76,7 +74,7 @@
           >
             <i class="fa-solid fa-cloud-moon"></i>
             <a class="nav-buttons-text" href="#">
-              <p>Dua</p>
+              <a>Dua</a>
             </a>
           </div>
           <div id="thirdMainContainerNav"
@@ -86,7 +84,7 @@
           >
             <i class="fa-solid fa-calendar-days"></i>
             <a class="nav-buttons-text" href="#">
-              <p>Calendar</p>
+              <a>Calendar</a>
             </a>
           </div>
           <div id="fourthMainContainerNav"
@@ -96,7 +94,7 @@
           >
             <i class="fa-solid fa-book-quran"></i>
             <a class="nav-buttons-text" href="#">
-              <p>Halal</p>
+              <a>Halal</a>
             </a>
           </div>
           
@@ -111,12 +109,13 @@
                 autocomplete="off"
                 class="search-bar"
                 placeholder="Search for a city"
-                onFocus="cityDropDown()"
+                onFocus="cityDropDown(), getCurrentCity()"
                 id="myInput"
-                onkeyup="filterFunction()"
+                onkeyup="filterFunction()" 
+           
                 
               />
-              <div id="myDropdown" class="dropdown-content" onClick="getCurrentCity()">
+              <div id="myDropdown" class="dropdown-content">
                 <a>Auckland</a>
                 <a>Wellington</a>
                 <a>Christchurch</a>
@@ -126,7 +125,7 @@
                 <a>Dunedin</a>
                 <a>Palmerston North</a>
                 <a>Nelson</a>
-                <a>Lautoka</a>
+                <a>Nadi</a>
               </div>
             </div>
     
@@ -140,6 +139,7 @@
         <div id="container">
             <div id="mainContainer" class="main-container">
                 <div class="top-current-date-container">
+                  <button class="setting-button" data-modal-target="#modal">Settings&nbsp;&nbsp;<i class="fa-solid fa-sliders"></i></button>
                     <a></a>
                     <a></a>
                     <div class="current-date">
@@ -155,10 +155,12 @@
                   </div>
             
                   <div class="location-method-container">
-                    <strong><p id="current-location">Dunedin Prayer times</p></strong>
-                    <strong><p>Method: ISNA <i data-modal-target="#modal" class="fa-solid fa-sliders"></i></p></strong>
+                    <strong><p id="current-location">Prayer times</p></strong>
+                    <strong><p id="method-display">Method: ISNA</p> </strong>
+                      
+                      
             
-                    <p class="method-details">Fajr is 15 degrees & Isha is 15 degrees.</p>
+                    <!-- <p class="method-details">Fajr is 15 degrees & Isha is 15 degrees.</p> -->
                   </div>
             
                   <div class="prayer-times">

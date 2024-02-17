@@ -1,4 +1,11 @@
 let allTime;
+var currentCity;
+var currentMethod;
+var currentMethodText;
+var selectElementMethod = document.getElementById('method-select');
+
+
+
 //create a function that checks if there is a current city saved in local storage
 
 const date = new Date();
@@ -36,36 +43,85 @@ function filterFunction() {
     }
   }
 }
-function getSavedCity(){
-  localStorage.setItem("currentCity", currentCity);
-  console.log("Current city saved to local storage: "+ currentCity);
-// check what is in the currentCity local storage, and then set the current city to that value
+function getSavedCityAndMethod(){
+  // check what is in the currentCity local storage, and then set the current city to that value. if it is empty, then set it to dunedin
+    
   currentCity = localStorage.getItem("currentCity");
-  console.log("Local Current city is: from getSavedCity"+ currentCity);
-  return currentCity;
-  getPrayerTimes()
-  }
-  
-function getCurrentCity(){
-var dropDownOptions = document.getElementById("myDropdown");
-dropDownOptions.addEventListener("click", function (event) {
-  if (event.target.tagName === "A") {
-    currentCity = event.target.textContent;
-    hideDropdown();
-    document.getElementById("current-location").innerHTML =
-      currentCity + " Prayer Times";
+    if (currentCity === null) {
+      currentCity = "Dunedin";
+      console.log(currentCity);
+    } 
+    else {
+      console.log(currentCity);
+     document.getElementById("current-location").innerHTML =currentCity + " Prayer Times";
+    }
+    
+  currentMethod = localStorage.getItem("currentMethod");
+  currentMethodText = localStorage.getItem("currentMethodText");
+
+    if (currentMethod === null) {
+      currentMethod = 2;
+      console.log("getSavedCityAndMethod() if. Should be ISNA " + currentMethod);
+      document.getElementById("method-display").innerHTML = "Method: Islamic Society of North America (ISNA)";
+
+    } 
+    else {
+      console.log("getSavedCityAndMethod() else " + currentMethodText);
+      document.getElementById("method-display").innerHTML = "Method: " + currentMethodText;
+      selectElementMethod.value = currentMethod;
+    }
+    // getMethod(currentMethod);
     getPrayerTimes();
-    console.log("Current city set to:"+ currentCity);
-    currentCity = localStorage.getItem("currentCity");
-    console.log("Local Current city is: from getCurrentCIty"+ currentCity);
-    return currentCity;
+  
+}
+  
+//runs the search for the current city
+function getCurrentCity(){
+  console.log("search opened");
+  var dropDownOptions = document.getElementById("myDropdown");
+  dropDownOptions.addEventListener("click", function (event) {
+  if (event.target.tagName === "A") {
+    console.log("city selected" + event.target.textContent);
+      currentCity = event.target.textContent;
+      getPrayerTimes(currentCity);
+     hideDropdown();
+     console.log(currentCity);
+      document.getElementById("current-location").innerHTML = currentCity + " Prayer Times";
+      currentCity = localStorage.setItem("currentCity", currentCity);
+      return currentCity;
   } else {
-    console.log("location not set");
+      currentCity = "Dunedin";
+      
+      console.log("location not set");
   }
 });
+
+
+}
+function getMethod() {
+  console.log("method opened" + currentMethod);
+  
+  selectElementMethod.addEventListener('change', function() {
+  currentMethod = this.value;
+  selectElementMethod.value = currentMethod;
+  currentMethodText = this.options[this.selectedIndex].text;
+  document.getElementById("method-display").innerHTML = "Method: " + currentMethodText;
+  localStorage.setItem("currentMethod", currentMethod);
+  localStorage.setItem("currentMethodText", currentMethodText);
+  console.log('Selected method:' + currentMethod + currentMethodText);
+  getPrayerTimes();
+  
+  // console.log('Selected method:' + currentMethodText);
+  
+  return currentMethodText;
+});
+getPrayerTimes();
 }
 
+
+
 function getPrayerTimes() {
+  console.log(currentMethod, currentCity);
   const PrayerTime =
     "https://api.aladhan.com/v1/calendarByCity/" +
     year +
@@ -73,7 +129,9 @@ function getPrayerTimes() {
     monthOfYear +
     "?city=" +
     currentCity +
-    "&country=New Zealand&method=2";
+    "&country=New Zealand&method="+
+    currentMethod
+    ;
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
