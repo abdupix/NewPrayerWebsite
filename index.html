@@ -14,7 +14,8 @@
 
 
   </head>
-  <body onload="getPrayerTimes()">
+  <body onload=" getSavedCity()">
+    <!-- getPrayerTimes(), -->
 
     <!-- <button data-modal-target="#modal">OPen settings MOdel</button> -->
 <div class="modal" id="modal">
@@ -113,8 +114,9 @@
                 onFocus="cityDropDown()"
                 id="myInput"
                 onkeyup="filterFunction()"
+                
               />
-              <div id="myDropdown" class="dropdown-content">
+              <div id="myDropdown" class="dropdown-content" onClick="getCurrentCity()">
                 <a>Auckland</a>
                 <a>Wellington</a>
                 <a>Christchurch</a>
@@ -124,6 +126,7 @@
                 <a>Dunedin</a>
                 <a>Palmerston North</a>
                 <a>Nelson</a>
+                <a>Lautoka</a>
               </div>
             </div>
     

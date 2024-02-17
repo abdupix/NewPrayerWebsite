@@ -1,13 +1,12 @@
 let currentCity = "Dunedin";
 let allTime;
+//create a function that checks if there is a current city saved in local storage
 
 const date = new Date();
 var dayOfMonth = date.getDate();
-console.log(dayOfMonth);
 var monthOfYear = date.getMonth() + 1;
-console.log(monthOfYear);
 var year = date.getFullYear();
-console.log(year);
+console.log("Todays date: " + dayOfMonth, monthOfYear, year);
 // var forApi =
 //   year + "/" + monthOfYear + "?address=Dunedin&method=2" + dayOfMonth;
 
@@ -38,6 +37,19 @@ function filterFunction() {
     }
   }
 }
+function getSavedCity(){
+  localStorage.setItem("currentCity", currentCity);
+  console.log("Current city saved to local storage: "+ currentCity);
+  if (localStorage.getItem("currentCity") !== null) {
+    currentCity = localStorage.getItem("currentCity");
+  }
+  else{
+    currentCity = "Dunedin";
+  }
+  console.log("Local Current city is: "+ currentCity);
+  getPrayerTimes()
+  }
+  
 function getCurrentCity(){
 var dropDownOptions = document.getElementById("myDropdown");
 dropDownOptions.addEventListener("click", function (event) {
@@ -47,6 +59,7 @@ dropDownOptions.addEventListener("click", function (event) {
     document.getElementById("current-location").innerHTML =
       currentCity + " Prayer Times";
     getPrayerTimes();
+    console.log("Current city set to:"+ currentCity);
     return currentCity;
   } else {
     console.log("location not set");
@@ -66,7 +79,6 @@ function getPrayerTimes() {
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       const timings = data.data[dayOfMonth].timings;
       allTime = data;
       const times = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
@@ -87,8 +99,6 @@ function getPrayerTimes() {
         if (diff >= 0 && diff < minDiff) {
           minDiff = diff;
           nextPrayerTime = time;
-
-          console.log(nextPrayerTime);
         }
       });
       //add current hijri dates to top right and english dates
@@ -107,7 +117,6 @@ function getPrayerTimes() {
       
 
       modifyNextPrayer();
-      populateTable();
       
       
     })
@@ -120,9 +129,6 @@ function getPrayerTimes() {
 
 
 
-function populateTable(){
-  console.log(allTime);
-}
 function modifyNextPrayer() {
   //if nextPrayerTime is nothing, set its value to Fajr
   if (nextPrayerTime == "") {
@@ -130,7 +136,6 @@ function modifyNextPrayer() {
   }
   console.log(`Next closest prayer time is ${nextPrayerTime}`);
   const nextPrayerClass = document.getElementById(nextPrayerTime + "Container");
-  console.log(nextPrayerClass);
   nextPrayerClass.classList.add("next-prayer");
   const MainPrayerNextContainer = document.getElementById("mainContainer");
   MainPrayerNextContainer.classList.add(
@@ -200,10 +205,6 @@ const options = {
 const observer = new IntersectionObserver((entries, observer) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      console.log(
-        `Container ${selectors.indexOf("#" + entry.target.id) + 1} is in view!`
-      );
-      console.log("#" + entry.target.id + "Nav");
       document
         .getElementById(entry.target.id + "Nav")
         .classList.add("active-nav");
