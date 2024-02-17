@@ -155,6 +155,8 @@ body {
 }
 .active-nav {
   background-color: var(--light-green);
+  box-shadow: inset 0px 0px 0px 2px var(--green),
+    0px 0px 10px 5px rgba(0, 140, 41, 0.1);
 }
 
 .nav-buttons-holder {
@@ -166,6 +168,7 @@ body {
   justify-content: center;
   align-items: center;
   border-radius: var(--border-radius);
+  
 }
 .active-nav:has {
   background-color: red;
@@ -187,6 +190,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
+  
 }
 
 .search-bar-container {
@@ -265,9 +269,7 @@ body {
   display: block;
 }
 
-.location-method-container {
-  flex-grow: 1;
-}
+
 
 .setting-button{
   height: fit-content;
@@ -306,6 +308,7 @@ body {
   align-items: center;
   text-align: center;
   line-height: 1.5rem;
+  flex-grow: 1;
 }
 .location-method-container i {
   color: var(--green);
@@ -422,7 +425,7 @@ select {
   padding: 0.5em 3.5em 0.5em 1em;
 
   /* reset */
-
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
@@ -521,6 +524,9 @@ button:focus{
     margin-bottom: 10px;
     margin-top:0;
   }
+  .search-bar{
+    max-width: 200px;
+  }
 
   .side-nav {
     flex-direction: row;
@@ -533,6 +539,7 @@ button:focus{
     padding: 0;
     margin:10px;
     border-radius: var(--border-radius);
+    box-shadow: 0px 0px 10px 2px rgba(0, 140, 41, 0.1);
   
   }
   .side-nav i{
@@ -542,8 +549,10 @@ button:focus{
   .nav-buttons-holder{
     gap:0;
     height:150%;
-
     border-radius: 50%;
+    aspect-ratio: 1/1;
+    
+
   }
   .main-container {
     gap: 0;
@@ -551,6 +560,15 @@ button:focus{
     height: auto;
     background-image: none;
     padding-top:0;
+  }
+  #current-location {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  #method-display{
+    font-size:0.75rem;
+    line-height: 1rem;
+    
   }
   .prayer-times {
     grid-template-columns: repeat(1, 1fr);
@@ -562,8 +580,12 @@ button:focus{
     justify-content: space-between;
     align-items: center;
   }
-  .top-current-date-container {
-    justify-content: center;
+  .setting-button{
+    height:inherit;
+    flex-grow: 1;
+  }
+  .top-current-date-container{
+    gap: 0.5rem;
   }
   .current-date {
     padding: 0.5rem 1rem;
@@ -571,7 +593,7 @@ button:focus{
   }
   .location-method-container {
     flex-grow: 0;
-    padding-bottom: 5px;
+    padding: 1rem
   }
   .method-details{
     display: none;
@@ -591,5 +613,21 @@ button:focus{
     color: var(--green);
     font-weight: bold;
   }
+  .modal {
+    width: 80%;
+    height: 50%;
+    padding: 1rem;
+  }
+  .minimal-method {
+    width:90%;
+  }
 }
 
+@media screen and (max-width: 320px) {
+  #method-display{
+    display: none;;
+  }
+  .location-method-container {
+    padding: 0.2rem;
+  }
+}
