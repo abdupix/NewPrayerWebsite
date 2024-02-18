@@ -24,7 +24,7 @@ html {
   overflow: hidden;
 }
 body {
-  width: calc(100% - 8rem);
+  width: calc(100% - 7rem);
   /* margin: 2rem 0 0 2rem!important; */
   top:0;
 }
@@ -33,10 +33,14 @@ body {
   scroll-snap-type: y mandatory;
   /* margin: 30px auto 0; */
   overflow-y: scroll;
- height:80vh;
-
-
+  height: 80vh;
 }
+button:hover, select:hover {
+  cursor: pointer;
+}
+
+
+
 #container::-webkit-scrollbar {
   display: none;
 }
@@ -55,7 +59,7 @@ body {
     ),
     url(background.jpg);
   background-size: cover;
-  background-position: bottom;
+  background-position: center;
   background-size: cover;
 }
 .next-prayer {
@@ -66,29 +70,54 @@ body {
 .main-container-fajr {
   filter: hue-rotate(-20deg) saturate(150%);
 }
+.main-container-fajr .prayer-times, .main-container-fajr .top-current-date-container, .main-container-fajr .location-method-container{
+  filter: hue-rotate(20deg) saturate(150%);
+} 
+
 .main-container-sunrise {
   filter: hue-rotate(0deg) saturate(120%);
 }
-.main-container-dhuhr {
+.main-container-sunrise .prayer-times, .main-container-sunrise .top-current-date-container, .main-container-sunrise .location-method-container{
+  filter: hue-rotate(0deg) saturate(120%);
+} 
+
+.main-container-dhuhr{
   filter: hue-rotate(-180deg) saturate(100%);
+  
 }
+.main-container-dhuhr .prayer-times, .main-container-dhuhr .top-current-date-container, .main-container-dhuhr .location-method-container{
+  filter: hue-rotate(-180deg) saturate(100%);
+} 
 
 
 
 .main-container-asr {
   filter: hue-rotate(-160deg) saturate(80%);
 }
+.main-container-asr .prayer-times, .main-container-asr .top-current-date-container, .main-container-asr .location-method-container{
+  filter: hue-rotate(160deg) saturate(80%);
+} 
+
 .main-container-maghrib {
   filter: hue-rotate(-10deg) saturate(40%);
 }
+.main-container-maghrib .prayer-times, .main-container-maghrib .top-current-date-container, .main-container-maghrib .location-method-container{
+  filter: hue-rotate(10deg) saturate(40%);
+} 
+
 .main-container-isha {
   filter: hue-rotate(-150deg) saturate(160%);
 }
+.main-container-isha .prayer-times, .main-container-isha .top-current-date-container, .main-container-isha .location-method-container{
+  filter: hue-rotate(150deg) saturate(160%);
+} 
+
 #snapScrollContainer{
   display: flex;
     flex-direction: column;
       top:0;
       margin: 2rem !important;
+      /* height: calc(100vh - 4rem); */
 }
 
 
@@ -117,7 +146,8 @@ body {
   margin: 5rem auto;
 }
 .third-main-container {
-  background-color: rgb(247, 96, 96);
+  /* background-color: rgb(247, 96, 96); */
+  background-color: var(--light-gray);
   margin: 5rem auto;
 }
 .fourth-main-container {
@@ -128,16 +158,18 @@ body {
 .side-nav {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   align-items: center;
   background-color: var(--white);
-  width: 8rem;
-  height: 100vh;
+  width: 7rem;
+  /* height: 80vh; */
   position: fixed;
   top: 0;
-  right: 0;
-  padding: 20vh 0;
-  gap: 1rem;
+  right: 1rem;
+  padding: 0.5rem 0;
+  transform: translateY(50%);
+  border-radius: var(--border-radius);
+  gap: 0.5rem;
 }
 .side-nav a,
 .side-nav i {
@@ -172,7 +204,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: var(--border-radius);
+  border-radius: var(--inner-border-radius);
+  padding:1rem;
   
 }
 .active-nav:has {
@@ -286,6 +319,7 @@ width: 19.6rem;
   height: fit-content;
   border-radius: var(--inner-border-radius);
   background-color: rgba(255, 255, 255, 0.5) !important;
+  border: none;
 }
 .setting-button:hover{
   background-color: var(--white) !important;
@@ -423,14 +457,31 @@ width: 19.6rem;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 8;
   pointer-events: none;}
-  
+
 #modalOverlay.modal-active {
   pointer-events: all;
   opacity: 1;
   transition: all 0.5s ease;
 
 }
+td{
+  padding: 0.5rem;
+}
+.table-prayer-name{
+  text-align: left;
+}
+.table-date-time{
+  display: flex;
+flex-direction: row;
+justify-content: space-between;
 
+}
+.table-prayer-date{
+
+  font-size: 4rem;
+  padding: 0;
+  line-height: 3.5rem;
+}
 
 select {
 
@@ -447,7 +498,19 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+table, th, td{
+  border: 2px black solid;
+  border-collapse:collapse;
+  /* keep all cells the same width except for the first column */
+  table-layout: fixed;
+  width: 100%;
 
+
+}
+td:hover{
+  background-color: var(--light-green);
+  box-shadow: inset 0px 0px 0px 2px var(--green), 0px 0px 10px 5px rgba(0, 140, 41, 0.1);
+}
 
 /* arrows */
 
@@ -516,8 +579,10 @@ button:focus{
   }
  
   .side-nav {
-   width:5rem;
-   padding:20vh 0;
+   width:4rem;
+  }
+  .side-nav a{
+    font-size: 0.75rem;
   }
   #snapScrollContainer{
     margin: 1rem !important;
@@ -551,6 +616,8 @@ button:focus{
     background-size: cover;
     background-position: bottom;
     background-size: cover;
+  }.side-nav a{
+    font-size: 1rem;
   }
   .grid-col-span-2{
     grid-column: span 1;
@@ -585,26 +652,28 @@ button:focus{
   .side-nav {
     flex-direction: row;
     align-items: center;
-    width: calc(100% - 20px);
+    width: calc(100% - 2rem);
     height: 62px;
     top: auto;
-    bottom: 0;
+    bottom: 3rem;
     z-index: 2;
     padding: 0;
-    margin:10px;
+    margin:0;
     border-radius: var(--border-radius);
     box-shadow: 0px 0px 10px 2px rgba(0, 140, 41, 0.1);
+    gap:0;
   
   }
+
   .side-nav i{
     font-size: 1.2rem;
     margin:0;
   }
   .nav-buttons-holder{
     gap:0;
-    height:150%;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
+    height:95%;
+    width:80%;
+    padding: 0rem;
     
 
   }
@@ -613,7 +682,8 @@ button:focus{
     margin: 0;
     height: auto;
     background-image: none;
-    padding-top:0;
+    padding:0;
+    border-radius: var(--border-radius);
   }
   #current-location {
     font-size: 1.5rem;
@@ -633,6 +703,7 @@ button:focus{
     padding: 10px 20px;
     justify-content: space-between;
     align-items: center;
+    border-radius: var(--inner-border-radius);
   }
   .setting-button{
     height:inherit;

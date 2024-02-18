@@ -259,17 +259,22 @@ const options = {
 };
 
 const observer = new IntersectionObserver((entries, observer) => {
+  let maxVisibleRatio = 0;
+  let maxVisibleContainer = null;
+
   entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      document
-        .getElementById(entry.target.id + "Nav")
-        .classList.add("active-nav");
-    } else {
-      document
-        .getElementById(entry.target.id + "Nav")
-        .classList.remove("active-nav");
+    if (entry.isIntersecting && entry.intersectionRatio > maxVisibleRatio) {
+      maxVisibleRatio = entry.intersectionRatio;
+      maxVisibleContainer = entry.target;
     }
   });
+
+  let currentActiveContainer = document.querySelector(".active-nav");
+
+  if (maxVisibleContainer && maxVisibleContainer !== currentActiveContainer) {
+    currentActiveContainer?.classList.remove("active-nav");
+    document.getElementById(maxVisibleContainer.id + "Nav").classList.add("active-nav");
+  }
 }, options);
 
 selectors.forEach((selector) => {
