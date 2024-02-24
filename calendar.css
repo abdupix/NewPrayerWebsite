@@ -71,14 +71,14 @@ button:hover, select:hover {
   filter: hue-rotate(-20deg) saturate(150%);
 }
 .main-container-fajr .prayer-times, .main-container-fajr .top-current-date-container, .main-container-fajr .location-method-container{
-  filter: hue-rotate(20deg) saturate(150%);
+  filter: hue-rotate(20deg) saturate(100%);
 } 
 
 .main-container-sunrise {
   filter: hue-rotate(0deg) saturate(120%);
 }
 .main-container-sunrise .prayer-times, .main-container-sunrise .top-current-date-container, .main-container-sunrise .location-method-container{
-  filter: hue-rotate(0deg) saturate(120%);
+  filter: hue-rotate(0deg) saturate(100%);
 } 
 
 .main-container-dhuhr{
@@ -95,21 +95,21 @@ button:hover, select:hover {
   filter: hue-rotate(-160deg) saturate(80%);
 }
 .main-container-asr .prayer-times, .main-container-asr .top-current-date-container, .main-container-asr .location-method-container{
-  filter: hue-rotate(160deg) saturate(80%);
+  filter: hue-rotate(160deg) saturate(100%);
 } 
 
 .main-container-maghrib {
   filter: hue-rotate(-10deg) saturate(40%);
 }
 .main-container-maghrib .prayer-times, .main-container-maghrib .top-current-date-container, .main-container-maghrib .location-method-container{
-  filter: hue-rotate(10deg) saturate(40%);
+  filter: hue-rotate(10deg) saturate(100%);
 } 
 
 .main-container-isha {
   filter: hue-rotate(-150deg) saturate(160%);
 }
 .main-container-isha .prayer-times, .main-container-isha .top-current-date-container, .main-container-isha .location-method-container{
-  filter: hue-rotate(150deg) saturate(160%);
+  filter: hue-rotate(150deg) saturate(100%);
 } 
 
 #snapScrollContainer{
@@ -144,6 +144,35 @@ button:hover, select:hover {
 .second-main-container {
   background-color: var(--light-green);
   margin: 5rem auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap:1rem;
+ padding:1.5rem;
+
+}
+.dua-content-container{
+  background-color: var(--white);
+  border-radius: var(--inner-border-radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+.dua1{
+  grid-row: 1 / 2;
+  grid-column: 1 / 5;
+  font-size: 1.2rem;
+}
+.dua1 p{
+  line-height:3rem;
+  font-size: 1.5rem;
+}
+.prayertime-date-dua{
+  font-size: 5rem;
+  font-weight: bold;
+
 }
 .third-main-container {
   /* background-color: rgb(247, 96, 96); */
@@ -164,10 +193,10 @@ button:hover, select:hover {
   width: 7rem;
   /* height: 80vh; */
   position: fixed;
-  top: 0;
+  top: calc(25% - 2rem);
   right: 1rem;
   padding: 0.5rem 0;
-  transform: translateY(50%);
+  /* transform: translateY(50%); */
   border-radius: var(--border-radius);
   gap: 0.5rem;
 }
@@ -562,6 +591,7 @@ button:focus{
 .modal-body button{
   margin: 1rem auto;
 }
+
 
 @media screen and (max-width: 1000px) {
   .prayer-times{

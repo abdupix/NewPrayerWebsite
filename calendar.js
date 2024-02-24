@@ -50,6 +50,7 @@ function getSavedCityAndMethod(){
     if (currentCity === null) {
       currentCity = "Dunedin";
       console.log(currentCity);
+      document.getElementById("current-location").innerHTML =currentCity + " Prayer Times";
     } 
     else {
       console.log(currentCity);
@@ -62,12 +63,12 @@ function getSavedCityAndMethod(){
     if (currentMethod === null) {
       currentMethod = 2;
       console.log("getSavedCityAndMethod() if. Should be ISNA " + currentMethod);
-      document.getElementById("method-display").innerHTML = "Method: Islamic Society of North America (ISNA)";
+      document.getElementById("method-display").innerHTML = "Method: <strong>Islamic Society of North America (ISNA)</strong>";
 
     } 
     else {
       console.log("getSavedCityAndMethod() else " + currentMethodText);
-      document.getElementById("method-display").innerHTML = "Method: " + currentMethodText;
+      document.getElementById("method-display").innerHTML = "Method: <strong>" + currentMethodText + "</strong>";
       selectElementMethod.value = currentMethod;
     }
     // getMethod(currentMethod);
@@ -139,11 +140,18 @@ function getPrayerTimes() {
       allTime = data;
       const times = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
       times.forEach((time) => {
-        const timeElement = document.getElementById(
-          `${time.toLowerCase()}-time`
-        );
+        const timeElement = document.getElementById(`${time.toLowerCase()}-time`);
         timeElement.innerHTML = timings[time].replace(" (NZDT)", "");
       });
+      const fajrTime = timings["Fajr"].replace(" (NZDT)", "");
+      document.getElementById("fajrTimeDua").innerHTML = fajrTime;
+
+      const maghribTime = timings["Maghrib"].replace(" (NZDT)", "");
+      document.getElementById("maghribTimeDua").innerHTML = maghribTime;
+
+
+        console.log(maghribTime,fajrTime);
+        console.log(maghribTime.replace(":", "") - fajrTime.replace(":", ""));
 
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
@@ -169,8 +177,33 @@ function getPrayerTimes() {
       document.getElementById("current-gregorian-month").innerHTML = GegorianMonthName;
       document.getElementById("current-gregorian-year").innerHTML = year;
 
-      //current method settings
-      
+      //add current dates to dua page
+      document.getElementById("hijri-day-dua").innerHTML = currentHijriDay;
+      document.getElementById("hijiri-month-year-dua").innerHTML = currentHijriMonth + " " + currentHijriYear;
+      document.getElementById("current-day-dua").innerHTML = dayOfMonth;
+      document.getElementById("current-month-year-dua").innerHTML = GegorianMonthName + " " + year;
+
+      function calculateTimeDifference(prayerTime, label) {
+        const parts = prayerTime.split(":");
+        const prayerDateTime = new Date();
+        prayerDateTime.setHours(parseInt(parts[0]), parseInt(parts[1]), 0, 0);
+        const diff = prayerDateTime - currentTime;
+
+        if (diff < 0) {
+          document.getElementById(label).innerHTML = `${label.replace('timeTill', '')} has passed for today`;
+          return;
+        }
+
+        const diffHours = Math.floor(diff / (1000 * 60 * 60));
+        const diffMinutes = Math.floor((diff / (1000 * 60)) % 60 + 1);
+        const timeString = `${diffHours} hrs & ${diffMinutes} mins`;
+        document.getElementById(label).innerHTML = `<strong>Time left:</strong> ${timeString}`;
+      }
+
+      calculateTimeDifference(maghribTime, 'timeTillMaghrib');
+      calculateTimeDifference(fajrTime, 'timeTillFajr');
+
+
 
       modifyNextPrayer();
       
