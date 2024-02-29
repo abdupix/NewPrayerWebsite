@@ -2,9 +2,8 @@ let allTime;
 var currentCity;
 var currentMethod;
 var currentMethodText;
-var selectElementMethod = document.getElementById('method-select');
-
-
+var selectElementMethod = document.getElementById("method-select");
+let currentCountry;
 
 //create a function that checks if there is a current city saved in local storage
 
@@ -43,86 +42,101 @@ function filterFunction() {
     }
   }
 }
-function getSavedCityAndMethod(){
+async function getCountry() {
+  try {
+      const response = await fetch('https://ipapi.co/json/');
+      if (response.ok) {
+          const data = await response.json();
+          currentCountry = data.country_name;
+      } else {
+          console.error('Failed to fetch country data');
+          return null;
+      }
+  } catch (error) {
+      console.error('Error fetching country data:', error);
+      return null;
+  }
+  getPrayerTimes();
+}
+
+
+function getSavedCityAndMethod() {
   // check what is in the currentCity local storage, and then set the current city to that value. if it is empty, then set it to dunedin
-    
+
   currentCity = localStorage.getItem("currentCity");
-    if (currentCity === null) {
-      currentCity = "Dunedin";
-      console.log(currentCity);
-      document.getElementById("current-location").innerHTML =currentCity + " Prayer Times";
-    } 
-    else {
-      console.log(currentCity);
-     document.getElementById("current-location").innerHTML =currentCity + " Prayer Times";
-    }
-    
+  if (currentCity === null) {
+    currentCity = "Dunedin";
+    console.log(currentCity);
+    document.getElementById("current-location").innerHTML =
+      currentCity + " Prayer Times";
+  } else {
+    console.log(currentCity);
+    document.getElementById("current-location").innerHTML =
+      currentCity + " Prayer Times";
+  }
+
   currentMethod = localStorage.getItem("currentMethod");
   currentMethodText = localStorage.getItem("currentMethodText");
 
-    if (currentMethod === null) {
-      currentMethod = 2;
-      console.log("getSavedCityAndMethod() if. Should be ISNA " + currentMethod);
-      document.getElementById("method-display").innerHTML = "Method: <strong>Islamic Society of North America (ISNA)</strong>";
-
-    } 
-    else {
-      console.log("getSavedCityAndMethod() else " + currentMethodText);
-      document.getElementById("method-display").innerHTML = "Method: <strong>" + currentMethodText + "</strong>";
-      selectElementMethod.value = currentMethod;
-    }
-    // getMethod(currentMethod);
-    getPrayerTimes();
-  
+  if (currentMethod === null) {
+    currentMethod = 2;
+    console.log("getSavedCityAndMethod() if. Should be ISNA " + currentMethod);
+    document.getElementById("method-display").innerHTML =
+      "Method: <strong>Islamic Society of North America (ISNA)</strong>";
+  } else {
+    console.log("getSavedCityAndMethod() else " + currentMethodText);
+    document.getElementById("method-display").innerHTML =
+      "Method: <strong>" + currentMethodText + "</strong>";
+    selectElementMethod.value = currentMethod;
+  }
+  // getMethod(currentMethod);
 }
-  
+
 //runs the search for the current city
-function getCurrentCity(){
+function getCurrentCity() {
   console.log("search opened");
   var dropDownOptions = document.getElementById("myDropdown");
   dropDownOptions.addEventListener("click", function (event) {
-  if (event.target.tagName === "A") {
-    console.log("city selected" + event.target.textContent);
+    if (event.target.tagName === "A") {
+      console.log("city selected" + event.target.textContent);
       currentCity = event.target.textContent;
       getPrayerTimes(currentCity);
-     hideDropdown();
-     console.log(currentCity);
-      document.getElementById("current-location").innerHTML = currentCity + " Prayer Times";
+      hideDropdown();
+      console.log(currentCity);
+      document.getElementById("current-location").innerHTML =
+        currentCity + " Prayer Times";
       currentCity = localStorage.setItem("currentCity", currentCity);
       return currentCity;
-  } else {
+    } else {
       currentCity = "Dunedin";
-      
+
       console.log("location not set");
-  }
-});
-
-
+    }
+  });
 }
 function getMethod() {
   console.log("method opened" + currentMethod);
-  
-  selectElementMethod.addEventListener('change', function() {
-  currentMethod = this.value;
-  selectElementMethod.value = currentMethod;
-  currentMethodText = this.options[this.selectedIndex].text;
-  document.getElementById("method-display").innerHTML = "Method: " + currentMethodText;
-  localStorage.setItem("currentMethod", currentMethod);
-  localStorage.setItem("currentMethodText", currentMethodText);
-  console.log('Selected method:' + currentMethod + currentMethodText);
+
+  selectElementMethod.addEventListener("change", function () {
+    currentMethod = this.value;
+    selectElementMethod.value = currentMethod;
+    currentMethodText = this.options[this.selectedIndex].text;
+    document.getElementById("method-display").innerHTML =
+      "Method: " + currentMethodText;
+    localStorage.setItem("currentMethod", currentMethod);
+    localStorage.setItem("currentMethodText", currentMethodText);
+    console.log("Selected method:" + currentMethod + currentMethodText);
+    getPrayerTimes();
+
+    // console.log('Selected method:' + currentMethodText);
+
+    return currentMethodText;
+  });
   getPrayerTimes();
-  
-  // console.log('Selected method:' + currentMethodText);
-  
-  return currentMethodText;
-});
-getPrayerTimes();
 }
 
-
-
 function getPrayerTimes() {
-  console.log(currentMethod, currentCity);
+  console.log(currentMethod, currentCity, currentCountry);
   const PrayerTime =
     "https://api.aladhan.com/v1/calendarByCity/" +
     year +
@@ -130,17 +144,22 @@ function getPrayerTimes() {
     monthOfYear +
     "?city=" +
     currentCity +
-    "&country=New Zealand&method="+
-    currentMethod
-    ;
+    "&country=NewZealand&method=" +
+    currentMethod;
+    console.log(year, monthOfYear, currentCity, currentMethod);
+    //this is only added for 29th feb lol. API doesnt work onleap years
+    dayOfMonth = 28;
+
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
       const timings = data.data[dayOfMonth].timings;
       allTime = data;
-      const times = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
+      const times =   ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
       times.forEach((time) => {
-        const timeElement = document.getElementById(`${time.toLowerCase()}-time`);
+        const timeElement = document.getElementById(
+          `${time.toLowerCase()}-time`
+        );
         timeElement.innerHTML = timings[time].replace(" (NZDT)", "");
       });
       const fajrTime = timings["Fajr"].replace(" (NZDT)", "");
@@ -149,9 +168,8 @@ function getPrayerTimes() {
       const maghribTime = timings["Maghrib"].replace(" (NZDT)", "");
       document.getElementById("maghribTimeDua").innerHTML = maghribTime;
 
-
-        console.log(maghribTime,fajrTime);
-        console.log(maghribTime.replace(":", "") - fajrTime.replace(":", ""));
+      console.log(maghribTime, fajrTime);
+      console.log(maghribTime.replace(":", "") - fajrTime.replace(":", ""));
 
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
@@ -169,19 +187,24 @@ function getPrayerTimes() {
       var currentHijriDay = data.data[dayOfMonth].date.hijri.day;
       document.getElementById("current-hijri-day").innerHTML = currentHijriDay;
       var currentHijriMonth = data.data[dayOfMonth].date.hijri.month.en;
-      document.getElementById("current-hijri-month").innerHTML = currentHijriMonth;
+      document.getElementById("current-hijri-month").innerHTML =
+        currentHijriMonth;
       var currentHijriYear = data.data[dayOfMonth].date.hijri.year;
-      document.getElementById("current-hijri-year").innerHTML = currentHijriYear;
+      document.getElementById("current-hijri-year").innerHTML =
+        currentHijriYear;
       document.getElementById("current-gregorian-day").innerHTML = dayOfMonth;
-      var GegorianMonthName = date.toLocaleString('default', { month: 'long' });
-      document.getElementById("current-gregorian-month").innerHTML = GegorianMonthName;
+      var GegorianMonthName = date.toLocaleString("default", { month: "long" });
+      document.getElementById("current-gregorian-month").innerHTML =
+        GegorianMonthName;
       document.getElementById("current-gregorian-year").innerHTML = year;
 
       //add current dates to dua page
       document.getElementById("hijri-day-dua").innerHTML = currentHijriDay;
-      document.getElementById("hijiri-month-year-dua").innerHTML = currentHijriMonth + " " + currentHijriYear;
+      document.getElementById("hijiri-month-year-dua").innerHTML =
+        currentHijriMonth + " " + currentHijriYear;
       document.getElementById("current-day-dua").innerHTML = dayOfMonth;
-      document.getElementById("current-month-year-dua").innerHTML = GegorianMonthName + " " + year;
+      document.getElementById("current-month-year-dua").innerHTML =
+        GegorianMonthName + " " + year;
 
       function calculateTimeDifference(prayerTime, label) {
         const parts = prayerTime.split(":");
@@ -190,33 +213,30 @@ function getPrayerTimes() {
         const diff = prayerDateTime - currentTime;
 
         if (diff < 0) {
-          document.getElementById(label).innerHTML = `${label.replace('timeTill', '')} has passed for today`;
+          document.getElementById(label).innerHTML = `${label.replace(
+            "timeTill",
+            ""
+          )} has passed for today`;
           return;
         }
 
         const diffHours = Math.floor(diff / (1000 * 60 * 60));
-        const diffMinutes = Math.floor((diff / (1000 * 60)) % 60 + 1);
+        const diffMinutes = Math.floor(((diff / (1000 * 60)) % 60) + 1);
         const timeString = `${diffHours} hrs & ${diffMinutes} mins`;
-        document.getElementById(label).innerHTML = `<strong>Time left:</strong> ${timeString}`;
+        document.getElementById(
+          label
+        ).innerHTML = `<strong>Time left:</strong> ${timeString}`;
       }
 
-      calculateTimeDifference(maghribTime, 'timeTillMaghrib');
-      calculateTimeDifference(fajrTime, 'timeTillFajr');
-
-
+      calculateTimeDifference(maghribTime, "timeTillMaghrib");
+      calculateTimeDifference(fajrTime, "timeTillFajr");
 
       modifyNextPrayer();
-      
-      
     })
     .catch((error) => {
       console.error(error);
     });
-
-
 }
-
-
 
 function modifyNextPrayer() {
   //if nextPrayerTime is nothing, set its value to Fajr
@@ -236,9 +256,7 @@ function modifyNextPrayer() {
 function nextPrayerIn() {
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
-      const currentMin = currentTime.getMinutes();
-      
-
+  const currentMin = currentTime.getMinutes();
 }
 //for settings modal
 const openModalButtons = document.querySelectorAll("[data-modal-target]");
@@ -279,6 +297,8 @@ function closeModal(modal) {
 
 // document.getElementById("dua").classList.add("active-nav");
 
+function getCurrentNav() {
+console.log("scrolled nerd")
 const selectors = [
   "#mainContainer",
   "#secondMainContainer",
@@ -306,7 +326,9 @@ const observer = new IntersectionObserver((entries, observer) => {
 
   if (maxVisibleContainer && maxVisibleContainer !== currentActiveContainer) {
     currentActiveContainer?.classList.remove("active-nav");
-    document.getElementById(maxVisibleContainer.id + "Nav").classList.add("active-nav");
+    document
+      .getElementById(maxVisibleContainer.id + "Nav")
+      .classList.add("active-nav");
   }
 }, options);
 
@@ -315,3 +337,4 @@ selectors.forEach((selector) => {
   observer.observe(container);
 });
 
+}

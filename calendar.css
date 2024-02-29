@@ -21,25 +21,29 @@ html {
   --border-radius: 1rem;
   --inner-border-radius: 0.5rem;
   color: var(--gray);
-  overflow: hidden;
+  scroll-snap-type: y mandatory;
 }
 body {
-  width: calc(100% - 7rem);
-  /* margin: 2rem 0 0 2rem!important; */
-  top:0;
+  top: 0;
+}
+.everything-container {
+  flex-direction: row-reverse;
+  margin:0;
+  padding: 10rem 1rem 2rem 2rem;
+  margin-right: 8rem;
 }
 
-#container {
-  scroll-snap-type: y mandatory;
-  /* margin: 30px auto 0; */
-  overflow-y: scroll;
-  height: 80vh;
+section {
+  scroll-snap-align: start;
+  scroll-margin-top: 5rem;
+  height: calc(100vh - 3rem - 4rem);
+  
 }
-button:hover, select:hover {
+
+button:hover,
+select:hover {
   cursor: pointer;
 }
-
-
 
 #container::-webkit-scrollbar {
   display: none;
@@ -49,9 +53,6 @@ button:hover, select:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 2rem;
-  padding: 1rem;
-
   background-image: linear-gradient(
       rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 1) 75%,
@@ -70,133 +71,122 @@ button:hover, select:hover {
 .main-container-fajr {
   filter: hue-rotate(-20deg) saturate(150%);
 }
-.main-container-fajr .prayer-times, .main-container-fajr .top-current-date-container, .main-container-fajr .location-method-container{
+.main-container-fajr .prayer-times,
+.main-container-fajr .top-current-date-container,
+.main-container-fajr .location-method-container {
   filter: hue-rotate(20deg) saturate(100%);
-} 
+}
 
 .main-container-sunrise {
   filter: hue-rotate(0deg) saturate(120%);
 }
-.main-container-sunrise .prayer-times, .main-container-sunrise .top-current-date-container, .main-container-sunrise .location-method-container{
+.main-container-sunrise .prayer-times,
+.main-container-sunrise .top-current-date-container,
+.main-container-sunrise .location-method-container {
   filter: hue-rotate(0deg) saturate(100%);
-} 
-
-.main-container-dhuhr{
-  filter: hue-rotate(-180deg) saturate(100%);
-  
 }
-.main-container-dhuhr .prayer-times, .main-container-dhuhr .top-current-date-container, .main-container-dhuhr .location-method-container{
+
+.main-container-dhuhr {
   filter: hue-rotate(-180deg) saturate(100%);
-} 
-
-
+}
+.main-container-dhuhr .prayer-times,
+.main-container-dhuhr .top-current-date-container,
+.main-container-dhuhr .location-method-container {
+  filter: hue-rotate(-180deg) saturate(100%);
+}
 
 .main-container-asr {
   filter: hue-rotate(-160deg) saturate(80%);
 }
-.main-container-asr .prayer-times, .main-container-asr .top-current-date-container, .main-container-asr .location-method-container{
+.main-container-asr .prayer-times,
+.main-container-asr .top-current-date-container,
+.main-container-asr .location-method-container {
   filter: hue-rotate(160deg) saturate(100%);
-} 
+}
 
 .main-container-maghrib {
   filter: hue-rotate(-10deg) saturate(40%);
 }
-.main-container-maghrib .prayer-times, .main-container-maghrib .top-current-date-container, .main-container-maghrib .location-method-container{
+.main-container-maghrib .prayer-times,
+.main-container-maghrib .top-current-date-container,
+.main-container-maghrib .location-method-container {
   filter: hue-rotate(10deg) saturate(100%);
-} 
+}
 
 .main-container-isha {
   filter: hue-rotate(-150deg) saturate(160%);
 }
-.main-container-isha .prayer-times, .main-container-isha .top-current-date-container, .main-container-isha .location-method-container{
+.main-container-isha .prayer-times,
+.main-container-isha .top-current-date-container,
+.main-container-isha .location-method-container {
   filter: hue-rotate(150deg) saturate(100%);
-} 
-
-#snapScrollContainer{
-  display: flex;
-    flex-direction: column;
-      top:0;
-      margin: 2rem !important;
-      /* height: calc(100vh - 4rem); */
 }
-
 
 .main-container,
 .second-main-container,
 .third-main-container,
 .fourth-main-container {
-  height: 80vh;
-  width: 100%;
-  scroll-snap-align: center;
+  padding: 1rem;
   border-radius: var(--border-radius);
 }
 .second-main-container,
 .third-main-container,
 .fourth-main-container {
-  text-align: center;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   margin: 5rem auto;
-  padding: 1rem;
 }
+
 .second-main-container {
   background-color: var(--light-green);
-  margin: 5rem auto;
+  /* margin: 5rem auto; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap:1rem;
- padding:1.5rem;
-
+  text-align: center;
+  gap: 1rem;
+  /* gap: 1rem;
+  padding: 1.5rem; */
 }
-.dua-content-container{
+.dua-content-container {
   background-color: var(--white);
   border-radius: var(--inner-border-radius);
   padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
 }
-.dua1{
+.dua1 {
   grid-row: 1 / 2;
   grid-column: 1 / 5;
   font-size: 1.2rem;
 }
-.dua1 p{
-  line-height:3rem;
+.dua1 p {
+  line-height: 3rem;
   font-size: 1.5rem;
 }
-.prayertime-date-dua{
+.prayertime-date-dua {
   font-size: 5rem;
   font-weight: bold;
-
 }
+
 .third-main-container {
-  /* background-color: rgb(247, 96, 96); */
   background-color: var(--light-gray);
-  margin: 5rem auto;
 }
 .fourth-main-container {
   background-color: rgb(19, 142, 200);
-  margin: 5rem auto;
+
 }
+
 
 .side-nav {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-evenly; */
   align-items: center;
   background-color: var(--white);
   width: 7rem;
-  /* height: 80vh; */
   position: fixed;
   top: calc(25% - 2rem);
   right: 1rem;
   padding: 0.5rem 0;
-  /* transform: translateY(50%); */
   border-radius: var(--border-radius);
   gap: 0.5rem;
 }
@@ -234,8 +224,7 @@ button:hover, select:hover {
   justify-content: center;
   align-items: center;
   border-radius: var(--inner-border-radius);
-  padding:1rem;
-  
+  padding: 1rem;
 }
 .active-nav:has {
   background-color: red;
@@ -250,14 +239,19 @@ button:hover, select:hover {
   color: var(--green);
   content: "Hikmah";
 }
-/* search bar */
 .name-search-container {
+  position: fixed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
-  
+  height: 3rem;
+  padding: 2.5rem 2rem;
+  padding-right: 10rem; 
+  /* background-color: red; */
+  width: 100vw;
+  z-index:99;
+  backdrop-filter: blur(7rem);
 }
 
 .search-bar-container {
@@ -269,7 +263,8 @@ button:hover, select:hover {
   align-items: center;
 }
 .search-bar-container:hover {
-  box-shadow: inset 0px 0px 0px 1px var(--green), 0px 0px 10px 4px rgba(0, 140, 41, 0.05);
+  box-shadow: inset 0px 0px 0px 1px var(--green),
+    0px 0px 10px 4px rgba(0, 140, 41, 0.05);
 }
 .search-bar-container:hover > .search-bar {
   padding: 0 30px;
@@ -285,7 +280,6 @@ button:hover, select:hover {
 .search-bar-container:visited > .search-icon {
   text-decoration: none;
 }
-/* search button */
 
 .search-icon {
   padding-right: 5px;
@@ -314,10 +308,10 @@ button:hover, select:hover {
 }
 
 .dropdown-content {
-  display: none; 
+  display: none;
   position: absolute;
   background-color: var(--white);
-width: 19.6rem;
+  width: 19.6rem;
   border-radius: var(--border-radius);
   z-index: 1;
   margin-top: 3rem;
@@ -329,7 +323,6 @@ width: 19.6rem;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
- 
 }
 
 .dropdown-content a:hover {
@@ -339,18 +332,15 @@ width: 19.6rem;
 
 .show {
   display: flex;
-  
 }
 
-
-
-.setting-button{
+.setting-button {
   height: fit-content;
   border-radius: var(--inner-border-radius);
   background-color: rgba(255, 255, 255, 0.5) !important;
   border: none;
 }
-.setting-button:hover{
+.setting-button:hover {
   background-color: var(--white) !important;
   box-shadow: 0px 0px 10px 4px rgba(0, 140, 41, 0.05);
 }
@@ -359,7 +349,7 @@ width: 19.6rem;
   display: flex;
   justify-content: space-between;
   color: var(--gray);
-  gap:0.25rem;
+  gap: 0.25rem;
 }
 
 .current-date {
@@ -425,8 +415,7 @@ width: 19.6rem;
   font-weight: bolder;
 }
 
-
-.modal-container{
+.modal-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -437,16 +426,12 @@ width: 19.6rem;
   left: 0;
   z-index: 11;
   pointer-events: none;
-  
-
 }
 .modal {
   border: 1px solid var(--gray);
   border-radius: var(--border-radius);
   z-index: 10;
   background-color: var(--light-green);
-  /* width: 85%;
-  height: 80vh; */
   padding: 2rem;
   transform: scale(0);
 }
@@ -485,36 +470,32 @@ width: 19.6rem;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 8;
-  pointer-events: none;}
+  pointer-events: none;
+}
 
 #modalOverlay.modal-active {
   pointer-events: all;
   opacity: 1;
   transition: all 0.5s ease;
-
 }
-td{
+td {
   padding: 0.5rem;
 }
-.table-prayer-name{
+.table-prayer-name {
   text-align: left;
 }
-.table-date-time{
+.table-date-time {
   display: flex;
-flex-direction: row;
-justify-content: space-between;
-
+  flex-direction: row;
+  justify-content: space-between;
 }
-.table-prayer-date{
-
+.table-prayer-date {
   font-size: 4rem;
   padding: 0;
   line-height: 3.5rem;
 }
 
 select {
-
-  /* styling */
   background-color: var(--white);
   border: thin solid var(--green);
   border-radius: var(--border-radius);
@@ -522,120 +503,118 @@ select {
   line-height: 1.5em;
   padding: 0.5em 3.5em 0.5em 1em;
 
-  /* reset */
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
-table, th, td{
+table,
+th,
+td {
   border: 2px black solid;
-  border-collapse:collapse;
-  /* keep all cells the same width except for the first column */
+  border-collapse: collapse;
   table-layout: fixed;
   width: 100%;
-
-
 }
-td:hover{
+td:hover {
   background-color: var(--light-green);
-  box-shadow: inset 0px 0px 0px 2px var(--green), 0px 0px 10px 5px rgba(0, 140, 41, 0.1);
+  box-shadow: inset 0px 0px 0px 2px var(--green),
+    0px 0px 10px 5px rgba(0, 140, 41, 0.1);
 }
-
-/* arrows */
-
-
 
 select.minimal-method {
-  background-image:
-    linear-gradient(45deg, transparent 50%, gray 50%),
+  background-image: linear-gradient(45deg, transparent 50%, gray 50%),
     linear-gradient(135deg, gray 50%, transparent 50%),
     linear-gradient(to right, #ccc, #ccc);
-  background-position:
-    calc(100% - 20px) calc(1em + 2px),
-    calc(100% - 15px) calc(1em + 2px),
-    calc(100% - 2.5em) 0.5em;
-  background-size:
-    5px 5px,
-    5px 5px,
-    1px 1.5em;
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
   background-repeat: no-repeat;
 }
 
 select.minimal-method:focus {
-  background-image:
-    linear-gradient(45deg, var(--green) 50%, transparent 50%),
+  background-image: linear-gradient(45deg, var(--green) 50%, transparent 50%),
     linear-gradient(135deg, transparent 50%, var(--green) 50%),
     linear-gradient(to right, #ccc, #ccc);
-  background-position:
-    calc(100% - 15px) 1em,
-    calc(100% - 20px) 1em,
+  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em,
     calc(100% - 2.5em) 0.5em;
-  background-size:
-    5px 5px,
-    5px 5px,
-    1px 1.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
   background-repeat: no-repeat;
   border-color: green;
   outline: 0;
 }
-button{
+button {
   border-radius: var(--border-radius);
   padding: 0.75rem;
   background-color: var(--white);
   border: 1px solid var(--green);
 }
-/* change the colour of the button when clicked */
-button:focus{
+button:focus {
   background-color: var(--light-gray);
 }
-.modal-body button{
+.modal-body button {
   margin: 1rem auto;
 }
 
-
 @media screen and (max-width: 1000px) {
-  .prayer-times{
+  .prayer-times {
     grid-template-columns: repeat(4, 1fr);
   }
-  .grid-col-span-2{
+  .grid-col-span-2 {
     grid-column: span 2;
+  }
+  .second-main-container{
+    grid-template-rows: repeat(3, 1fr);
+  }
+  .dua2, .dua3, .dua4, .dua5 {
+    grid-column: 1 / 3;
+  }
+  .dua3, .dua5{
+    grid-column: 3 / 5;
+  }
+  .dua1 p {
+    line-height: 2rem;
+    font-size: 1.2rem;
+  }
+  .prayertime-date-dua{
+    line-height: 5rem;
+    font-size: 4rem;
   }
 }
 
-
-@media screen and (max-width: 758px) {
-  body{
+/* @media screen and (max-width: 758px) {
+  body {
     width: calc(100% - 5rem);
   }
- 
+
   .side-nav {
-   width:4rem;
+    width: 4rem;
   }
-  .side-nav a{
+  .side-nav a {
     font-size: 0.75rem;
   }
-  #snapScrollContainer{
-    margin: 1rem !important;
-  }
-  .page-name{
+
+  .page-name {
     font-size: 1rem;
     line-height: 1rem;
   }
-  .setting-button{
+  .setting-button {
     height: inherit;
     flex-grow: 1;
   }
-  .prayer-times{
+  .prayer-times {
     grid-template-columns: repeat(3, 1fr);
   }
-  .grid-col-span-2{
+  .grid-col-span-2 {
     grid-column: span 1;
+  }cal
+} */
+@media screen and (max-width: 600px) {
+  /* /* for now : table is off* */
+  table{
+    display:none;
   }
-
-}
-@media screen and (max-width: 425px) {
   body {
-    margin: 0!important;
+    margin: 0 !important;
     width: 100vw;
     background-image: linear-gradient(
         rgba(255, 255, 255, 0) 0%,
@@ -646,37 +625,67 @@ button:focus{
     background-size: cover;
     background-position: bottom;
     background-size: cover;
-  }.side-nav a{
+  }
+  section{
+    height:auto !important;
+    scroll-margin-top:0;
+
+ 
+
+  }
+  .everything-container{
+    margin:0;
+    padding: 5rem 0rem;
+
+  }
+  .side-nav a {
     font-size: 1rem;
   }
-  .grid-col-span-2{
+  .grid-col-span-2 {
     grid-column: span 1;
   }
   #container {
     margin: 0;
-    height:85vh
+    height: 85vh;
   }
   .main-container,
-.second-main-container,
-.third-main-container,
-.fourth-main-container {
-  scroll-snap-align: none;
-  padding:0 auto;
-  margin-bottom:3rem;
-  margin-top:2rem;
-  height:80vh;
-}
-.fourth-main-container{
-  margin-bottom:200px;
-}
+  .second-main-container,
+  .third-main-container,
+  .fourth-main-container {
+    scroll-snap-align: none;
+    padding: 0 auto;
+    margin-bottom: 0rem;
+    margin-top: 0rem;
+    height: 80vh;
+    border-radius: 0;
+  }
+  .dua2, .dua3, .dua4, .dua5 {
+    grid-column: 1 / 5;
+  }
+  .fourth-main-container {
+    margin-bottom: 200px;
+  }
+  .dua1 h1{
+    font-size: 1.2rem;
+  }
+  .dua1 p{
+    font-size: 1rem;
+  }
+  .dua-content-container{
+    padding:0;
+  }
 
   .name-search-container {
-    flex-direction: column;
+    justify-content: space-around;
     margin-bottom: 10px;
-    margin-top:0;
+    margin-top: 0;
+    padding: 2rem 1rem;
   }
-  .search-bar{
-    max-width: 15rem;
+  .page-name{
+    font-size:1rem;
+  }
+  .search-bar {
+    max-width: 10rem;
   }
 
   .side-nav {
@@ -685,44 +694,40 @@ button:focus{
     width: calc(100% - 2rem);
     height: 62px;
     top: auto;
-    bottom: 3rem;
+    bottom: 1rem;
     z-index: 2;
     padding: 0;
-    margin:0;
+    margin: 0;
     border-radius: var(--border-radius);
     box-shadow: 0px 0px 10px 2px rgba(0, 140, 41, 0.1);
-    gap:0;
-  
+    gap: 0;
   }
 
-  .side-nav i{
+  .side-nav i {
     font-size: 1.2rem;
-    margin:0;
+    margin: 0;
   }
-  .nav-buttons-holder{
-    gap:0;
-    height:95%;
-    width:80%;
+  .nav-buttons-holder {
+    gap: 0;
+    height: 95%;
+    width: 80%;
     padding: 0rem;
-    
-
   }
   .main-container {
     gap: 0;
     margin: 0;
     height: auto;
     background-image: none;
-    padding:0;
+    padding: 0;
     border-radius: var(--border-radius);
   }
   #current-location {
     font-size: 1.5rem;
     line-height: 2rem;
   }
-  #method-display{
-    font-size:0.75rem;
+  #method-display {
+    font-size: 0.75rem;
     line-height: 1rem;
-    
   }
   .prayer-times {
     grid-template-columns: repeat(1, 1fr);
@@ -735,11 +740,11 @@ button:focus{
     align-items: center;
     border-radius: var(--inner-border-radius);
   }
-  .setting-button{
-    height:inherit;
+  .setting-button {
+    height: inherit;
     flex-grow: 1;
   }
-  .top-current-date-container{
+  .top-current-date-container {
     gap: 0.5rem;
   }
   .current-date {
@@ -748,9 +753,9 @@ button:focus{
   }
   .location-method-container {
     flex-grow: 0;
-    padding: 1rem
+    padding: 1rem;
   }
-  .method-details{
+  .method-details {
     display: none;
   }
 
@@ -774,15 +779,15 @@ button:focus{
     padding: 1rem;
   }
   .minimal-method {
-    width:90%;
+    width: 90%;
   }
-  .dropdown-content{
-    max-width:16.9rem;
+  .dropdown-content {
+    max-width: 16.9rem;
   }
 }
 
 @media screen and (max-width: 320px) {
-  #method-display{
+  #method-display {
     display: none;
   }
   .location-method-container {
