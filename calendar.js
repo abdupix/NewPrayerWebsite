@@ -148,7 +148,7 @@ function getPrayerTimes() {
     currentMethod;
     console.log(year, monthOfYear, currentCity, currentMethod);
     //this is only added for 29th feb lol. API doesnt work onleap years
-    dayOfMonth = 28;
+    //dayOfMonth = 28;
 
   fetch(PrayerTime)
     .then((response) => response.json())
