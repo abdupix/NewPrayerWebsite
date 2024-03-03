@@ -56,16 +56,33 @@ async function getCountry() {
       console.error('Error fetching country data:', error);
       return null;
   }
-  // getPrayerTimes();
+
+// change the list of cities based on country
+  
+  if (currentCountry === "Fiji"){
+    const fijiCities = ["Ba", "Labasa", "Lautoka", "Nadi","Rakiraki", "Suva"];
+
+    const changeCityList =document.getElementById("myDropdown");
+    changeCityList.innerHTML = fijiCities.map((city, index) => {
+        if (index === 0) {
+            return `<a id="defaultCity">${city}</a>`;
+        } else {
+            return `<a>${city}</a>`;
+        }
+    }).join("");
+  }
+
+  getSavedCityAndMethod()
 }
 
 
 function getSavedCityAndMethod() {
   // check what is in the currentCity local storage, and then set the current city to that value. if it is empty, then set it to dunedin
-
+defaultCity = document.getElementById("defaultCity").innerHTML;
+console.log(defaultCity);
   currentCity = localStorage.getItem("currentCity");
   if (currentCity === null) {
-    currentCity = "Dunedin";
+    currentCity = defaultCity;
     console.log(currentCity);
     document.getElementById("current-location").innerHTML =
       currentCity + " Prayer Times";
@@ -138,6 +155,7 @@ function getMethod() {
 
 function getPrayerTimes() {
   console.log(currentMethod, currentCity, currentCountry);
+  // currentCountry = "Fiji"
   const PrayerTime =
     "https://api.aladhan.com/v1/calendarByCity/" +
     year +
@@ -145,12 +163,13 @@ function getPrayerTimes() {
     monthOfYear +
     "?city=" +
     currentCity +
-    "&country=New%20Zealand&method=" +
+    "&country=" + currentCountry + "&method=" +
+    // "&country=New%20Zealand&method=" +
     currentMethod;
     console.log(year, monthOfYear, currentCity, currentMethod);
     //this is only added for 29th feb lol. API doesnt work onleap years
     //dayOfMonth = 28;
-
+  console.log(PrayerTime);
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
@@ -162,11 +181,20 @@ function getPrayerTimes() {
           `${time.toLowerCase()}-time`
         );
         timeElement.innerHTML = timings[time].replace(" (NZDT)", "");
+        if (currentCountry === "Fiji"){
+          timeElement.innerHTML = timings[time].replace(" (+12)", "");
+        }
+        console.log(timings.Fajr)
       });
-      const fajrTime = timings["Fajr"].replace(" (NZDT)", "");
-      document.getElementById("fajrTimeDua").innerHTML = fajrTime;
+      console.log(timings.Fajr,)
+      var fajrTime = timings["Fajr"].replace(" (NZDT)", "");
+      var maghribTime = timings["Maghrib"].replace(" (NZDT)", "");
+      if (currentCountry === "Fiji"){
+        var fajrTime = timings["Fajr"].replace(" (+12)", "");
+      var maghribTime = timings["Maghrib"].replace(" (+12)", "");
+      }
 
-      const maghribTime = timings["Maghrib"].replace(" (NZDT)", "");
+      document.getElementById("fajrTimeDua").innerHTML = fajrTime;
       document.getElementById("maghribTimeDua").innerHTML = maghribTime;
 
       console.log(maghribTime, fajrTime);

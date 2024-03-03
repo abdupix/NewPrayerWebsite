@@ -9,8 +9,8 @@
     <title>New Prayer Calendar</title>
     <link rel="icon" type="image/x-icon" href="LogoGreenSVG.ico">
   </head>
-  <body onload="getSavedCityAndMethod()" onscroll="getCurrentNav()">
-    <!-- ; getCountry() -->
+  <body onload=" getCountry()" onscroll="getCurrentNav()">
+    <!-- ; getSavedCityAndMethod() -->
     <div class="modal-container">
       <div class="modal" id="modal">
         <div class="modal-header">
@@ -53,14 +53,14 @@
           <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown(), getCurrentCity()"  id="myInput" onkeyup="filterFunction()" />
           <div id="myDropdown" class="dropdown-content" >
             <a>Auckland</a>
-            <a>Wellington</a>
             <a>Christchurch</a>
-            <a>Hamilton</a>
-            <a>Tauranga</a>
-            <a>Napier</a>
             <a>Dunedin</a>
-            <a>Palmerston North</a>
+            <a>Hamilton</a>
+            <a>Napier</a>
             <a>Nelson</a>
+            <a>Palmerston North</a>
+            <a>Tauranga</a>
+            <a>Wellington</a>
             <!-- <a>Nadi (Not working!)</a> -->
           </div>
         </div>
