@@ -145,7 +145,7 @@ function getPrayerTimes() {
     monthOfYear +
     "?city=" +
     currentCity +
-    "&country=NZ&method=" +
+    "&country=New%20Zealand&method=" +
     currentMethod;
     console.log(year, monthOfYear, currentCity, currentMethod);
     //this is only added for 29th feb lol. API doesnt work onleap years
