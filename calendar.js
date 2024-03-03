@@ -64,7 +64,7 @@ async function getCountry() {
 
     const changeCityList =document.getElementById("myDropdown");
     changeCityList.innerHTML = fijiCities.map((city, index) => {
-        if (index === 0) {
+        if (index === 3) {
             return `<a id="defaultCity">${city}</a>`;
         } else {
             return `<a>${city}</a>`;
