@@ -56,7 +56,7 @@ async function getCountry() {
       console.error('Error fetching country data:', error);
       return null;
   }
-  getPrayerTimes();
+  // getPrayerTimes();
 }
 
 
@@ -89,6 +89,7 @@ function getSavedCityAndMethod() {
       "Method: <strong>" + currentMethodText + "</strong>";
     selectElementMethod.value = currentMethod;
   }
+  getPrayerTimes()
   // getMethod(currentMethod);
 }
 
@@ -132,7 +133,7 @@ function getMethod() {
 
     return currentMethodText;
   });
-  getPrayerTimes();
+  // getPrayerTimes();
 }
 
 function getPrayerTimes() {
@@ -144,7 +145,7 @@ function getPrayerTimes() {
     monthOfYear +
     "?city=" +
     currentCity +
-    "&country=NewZealand&method=" +
+    "&country=NZ&method=" +
     currentMethod;
     console.log(year, monthOfYear, currentCity, currentMethod);
     //this is only added for 29th feb lol. API doesnt work onleap years

@@ -379,6 +379,7 @@ select:hover {
   text-align: center;
   line-height: 1.5rem;
   flex-grow: 1;
+  padding-bottom: 3rem;
 }
 .location-method-container i {
   color: var(--green);
@@ -629,9 +630,9 @@ button:focus {
   section{
     height:auto !important;
     scroll-margin-top:0;
-
- 
-
+  }
+  section:nth-child(2){
+    height: inherit !important;
   }
   .everything-container{
     margin:0;
@@ -661,7 +662,13 @@ button:focus {
   }
   .dua2, .dua3, .dua4, .dua5 {
     grid-column: 1 / 5;
+    flex-direction: row;
+    align-items:center;
   }
+  .prayertime-date-dua{
+    font-size:3rem;
+  }
+
   .fourth-main-container {
     margin-bottom: 200px;
   }
@@ -671,6 +678,26 @@ button:focus {
   .dua1 p{
     font-size: 1rem;
   }
+
+  .dua2 p, .dua3 p, .dua4 p, .dua5 p {
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+
+}
+.dua2 h1, .dua3 h1, .dua4 h1, .dua5 h1 {
+  flex: 0.8 1 0;
+  width: 0;
+    min-width: 0;
+    text-align: left;
+    padding-left:1rem;
+}
+.dua4 h1, .dua5 h1 {
+  flex: 1.2 1 0;
+}
+
+
+  
   .dua-content-container{
     padding:0;
   }

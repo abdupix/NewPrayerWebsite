@@ -9,7 +9,8 @@
     <title>New Prayer Calendar</title>
     <link rel="icon" type="image/x-icon" href="LogoGreenSVG.ico">
   </head>
-  <body onload="getSavedCityAndMethod(); getCountry()" onscroll="getCurrentNav()">
+  <body onload="getSavedCityAndMethod()" onscroll="getCurrentNav()">
+    <!-- ; getCountry() -->
     <div class="modal-container">
       <div class="modal" id="modal">
         <div class="modal-header">
@@ -47,10 +48,10 @@
     <div id="modalOverlay"></div>
     <div class="name-search-container">
       <p class="page-name"> Prayer</p>
-      <div class="search-bar-container">
+      <div class="search-bar-container" >
         <div class="choose-city">
-          <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown(), getCurrentCity()" id="myInput" onkeyup="filterFunction()" />
-          <div id="myDropdown" class="dropdown-content">
+          <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown(), getCurrentCity()"  id="myInput" onkeyup="filterFunction()" />
+          <div id="myDropdown" class="dropdown-content" >
             <a>Auckland</a>
             <a>Wellington</a>
             <a>Christchurch</a>
@@ -68,7 +69,7 @@
         </a>
       </div>
     </div>
-    <div class="everything-container">
+    <div class="everything-container" onclick="hideDropdown()">
       <div>
         <div class="side-nav">
           <div id="mainContainerNav" class="nav-buttons-holder" style="cursor: pointer" onclick="window.location='#mainContainer';">
@@ -173,7 +174,7 @@
               <p id="timeTillMaghrib">0 hrs & 0 mins left</p>
             </div>
             <div class="dua-content-container dua4">
-              <h1>Arabic Date</h1>
+              <h1>Hijri Date</h1>
               <p id="hijri-day-dua" class="prayertime-date-dua">00</p>
               <p id="hijiri-month-year-dua">Hijri Year</p>
             </div>
