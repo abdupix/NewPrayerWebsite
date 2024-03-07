@@ -72,22 +72,22 @@ async function getCountry() {
     }).join("");
   }
 
-  getSavedCityAndMethod()
+  // getSavedCityAndMethod();
+  getCurrentCity();
 }
 
 
 function getSavedCityAndMethod() {
   // check what is in the currentCity local storage, and then set the current city to that value. if it is empty, then set it to dunedin
 defaultCity = document.getElementById("defaultCity").innerHTML;
-console.log(defaultCity);
   currentCity = localStorage.getItem("currentCity");
   if (currentCity === null) {
     currentCity = defaultCity;
-    console.log(currentCity);
+    console.log("Default location: "+ currentCity);
     document.getElementById("current-location").innerHTML =
       currentCity + " Prayer Times";
   } else {
-    console.log(currentCity);
+    console.log("Saved location: "+ currentCity);
     document.getElementById("current-location").innerHTML =
       currentCity + " Prayer Times";
   }
@@ -97,16 +97,17 @@ console.log(defaultCity);
 
   if (currentMethod === null) {
     currentMethod = 2;
-    console.log("getSavedCityAndMethod() if. Should be ISNA " + currentMethod);
+    console.log("Default method: " + currentMethod);
     document.getElementById("method-display").innerHTML =
       "Method: <strong>Islamic Society of North America (ISNA)</strong>";
   } else {
-    console.log("getSavedCityAndMethod() else " + currentMethodText);
+    console.log("Saved method: " + currentMethodText);
     document.getElementById("method-display").innerHTML =
       "Method: <strong>" + currentMethodText + "</strong>";
     selectElementMethod.value = currentMethod;
   }
-  getPrayerTimes()
+  getPrayerTimes();
+
   // getMethod(currentMethod);
 }
 
@@ -131,9 +132,10 @@ function getCurrentCity() {
       console.log("location not set");
     }
   });
+  getSavedCityAndMethod();
 }
 function getMethod() {
-  console.log("method opened" + currentMethod);
+  console.log("method opened. The current method is: " + currentMethod);
 
   selectElementMethod.addEventListener("change", function () {
     currentMethod = this.value;
@@ -144,17 +146,18 @@ function getMethod() {
     localStorage.setItem("currentMethod", currentMethod);
     localStorage.setItem("currentMethodText", currentMethodText);
     console.log("Selected method:" + currentMethod + currentMethodText);
-    getPrayerTimes();
+    // getPrayerTimes();
+    getSavedCityAndMethod();
 
     // console.log('Selected method:' + currentMethodText);
 
     return currentMethodText;
   });
-  // getPrayerTimes();
+
 }
 
 function getPrayerTimes() {
-  console.log(currentMethod, currentCity, currentCountry);
+  console.log("in getPrayerTimes(), method: ", currentMethod, ". city: ", currentCity,". country: ", currentCountry);
   // currentCountry = "Fiji"
   const PrayerTime =
     "https://api.aladhan.com/v1/calendarByCity/" +
@@ -166,15 +169,15 @@ function getPrayerTimes() {
     "&country=" + currentCountry + "&method=" +
     // "&country=New%20Zealand&method=" +
     currentMethod;
-    console.log(year, monthOfYear, currentCity, currentMethod);
     //this is only added for 29th feb lol. API doesnt work onleap years
     //dayOfMonth = 28;
   console.log(PrayerTime);
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
-      const timings = data.data[dayOfMonth].timings;
+      const timings = data.data[dayOfMonth - 1].timings;
       allTime = data;
+      // console.log(data.data[dayOfMonth - 1].date);
       const times =   ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
       times.forEach((time) => {
         const timeElement = document.getElementById(
@@ -184,9 +187,8 @@ function getPrayerTimes() {
         if (currentCountry === "Fiji"){
           timeElement.innerHTML = timings[time].replace(" (+12)", "");
         }
-        console.log(timings.Fajr)
+        console.log("fajr", timings.Fajr, "isha", "sunrise", timings.Sunrise, "dhuhr", timings.Dhuhr, "asr", timings.Asr, "maghrib", timings.Maghrib, "isha", timings.Isha);
       });
-      console.log(timings.Fajr,)
       var fajrTime = timings["Fajr"].replace(" (NZDT)", "");
       var maghribTime = timings["Maghrib"].replace(" (NZDT)", "");
       if (currentCountry === "Fiji"){
@@ -197,8 +199,6 @@ function getPrayerTimes() {
       document.getElementById("fajrTimeDua").innerHTML = fajrTime;
       document.getElementById("maghribTimeDua").innerHTML = maghribTime;
 
-      console.log(maghribTime, fajrTime);
-      console.log(maghribTime.replace(":", "") - fajrTime.replace(":", ""));
 
       const currentTime = new Date();
       const currentHour = currentTime.getHours();
@@ -272,9 +272,13 @@ function modifyNextPrayer() {
   if (nextPrayerTime == "") {
     nextPrayerTime = "Fajr";
   }
-  console.log(`Next closest prayer time is ${nextPrayerTime}`);
+  // console.log(`Next closest prayer time is ${nextPrayerTime}`);
   const nextPrayerClass = document.getElementById(nextPrayerTime + "Container");
   nextPrayerClass.classList.add("next-prayer");
+
+
+
+
   const MainPrayerNextContainer = document.getElementById("mainContainer");
   MainPrayerNextContainer.classList.add(
     "main-container-" + nextPrayerTime.toLowerCase()

@@ -63,6 +63,13 @@ select:hover {
   background-position: center;
   background-size: cover;
 }
+.center-image-mosque{
+  flex: 1 1 0;
+  min-height: 0;
+  opacity: 0.5;
+}
+/* can you make a semi-circle progress bar */
+
 .next-prayer {
   box-shadow: inset 0px 0px 0px 2px var(--green),
     0px 0px 10px 5px rgba(0, 140, 41, 0.1);

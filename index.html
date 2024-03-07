@@ -24,20 +24,21 @@
           </label>
           <br>
           <select class="minimal-method" id="method-select" default onfocus="getMethod()">
-            <option value="1">Muslim World League</option>
+            <option value="1">University of Islamic Sciences, Karachi</option>
             <option value="2" selected>Islamic Society of North America - (Default)</option>
-            <option value="3">Egyptian General Authority of Survey</option>
+            <option value="3">Muslim World League</option>
             <option value="4">Umm Al-Qura University, Makkah</option>
-            <option value="5">University of Islamic Sciences, Karachi</option>
-            <option value="6">Institute of Geophysics, University of Tehran</option>
-            <option value="7">Shia Ithna-Ashari, Leva Institute, Qum</option>
-            <option value="8">Gulf Region</option>
-            <option value="9">Kuwait</option>
-            <option value="10">Qatar</option>
+            <option value="5">Egyptian General Authority of Survey</option>
+            <option value="7">Institute of Geophysics, University of Tehran</option>
+            
+            <!-- <option value="7">Shia Ithna-Ashari, Leva Institute, Qum</option> -->
+            <!-- <option value="8">Gulf Region</option> -->
+            <!-- <option value="9">Kuwait</option>
+            <option value="10">Qatar</option> -->
             <option value="11">Majlis Ugama Islam Singapura, Singapore</option>
-            <option value="12">Union Organization islamic de France</option>
+            <!-- <option value="12">Union Organization islamic de France</option>
             <option value="13">Diyanet İşleri Başkanlığı, Turkey</option>
-            <option value="14">Spiritual Administration of Muslims of Russia</option>
+            <option value="14">Spiritual Administration of Muslims of Russia</option> -->
             <option value="15">Moonsighting Committee</option>
           </select>
           <br>
@@ -50,7 +51,7 @@
       <p class="page-name"> Prayer</p>
       <div class="search-bar-container" >
         <div class="choose-city">
-          <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown(), getCurrentCity()"  id="myInput" onkeyup="filterFunction()" />
+          <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown()"  id="myInput" onkeyup="filterFunction()" />
           <div id="myDropdown" class="dropdown-content" >
             <a>Auckland</a>
             <a>Christchurch</a>
@@ -118,7 +119,9 @@
                 <p id="current-gregorian-year"></p>
               </div>
             </div>
+    
             <div class="location-method-container">
+              <img class="center-image-mosque" src="background-removed.png">
               <strong>
                 <p id="current-location">Prayer times</p>
               </strong>
@@ -126,7 +129,7 @@
               <!-- <p class="method-details">Fajr is 15 degrees & Isha is 15 degrees.</p> -->
             </div>
             <div class="prayer-times">
-              <div class="prayer-times-containers" id="FajrContainer">
+              <div class="prayer-times-containers" id="FajrContainer prayerTimesContainers">
                 <p class="fajr-name">Fajr</p>
                 <p id="fajr-time">00:00</p>
               </div>
@@ -190,7 +193,7 @@
             <h3>Also coming very soon...</h3>
             <br>
             <br>
-            <table>
+            <!-- <table>
               <thead>
                 <tr>
                   <td></td>
@@ -304,7 +307,7 @@
                   </div>
                 </td>
               </tr>
-            </table>
+            </table> -->
           </section>
           <section id="fourthMainContainer" class="fourth-main-container">
             <h1>Directory of Halal places to eat and products! </h1>
