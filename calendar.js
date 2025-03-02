@@ -96,10 +96,10 @@ defaultCity = document.getElementById("defaultCity").innerHTML;
   currentMethodText = localStorage.getItem("currentMethodText");
 
   if (currentMethod === null) {
-    currentMethod = 2;
+    currentMethod = 3;
     console.log("Default method: " + currentMethod);
     document.getElementById("method-display").innerHTML =
-      "Method: <strong>Islamic Society of North America (ISNA)</strong>";
+      "Method: <strong>Muslim World League</strong>";
   } else {
     console.log("Saved method: " + currentMethodText);
     document.getElementById("method-display").innerHTML =
@@ -175,9 +175,9 @@ function getPrayerTimes() {
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
-      const timings = data.data[dayOfMonth - 3].timings;
+      const timings = data.data[dayOfMonth-1].timings;
       allTime = data;
-      // console.log(data.data[dayOfMonth - 1].date);
+      console.log(data.data[dayOfMonth - 1].date);
       const times =   ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
       times.forEach((time) => {
         const timeElement = document.getElementById(
@@ -187,7 +187,7 @@ function getPrayerTimes() {
         if (currentCountry === "Fiji"){
           timeElement.innerHTML = timings[time].replace(" (+12)", "");
         }
-        console.log("fajr", timings.Fajr, "isha", "sunrise", timings.Sunrise, "dhuhr", timings.Dhuhr, "asr", timings.Asr, "maghrib", timings.Maghrib, "isha", timings.Isha);
+        console.log("fajr", timings.Fajr, "isha", "sunrise", timings.Sunrise, "dhuhr", timings.Dhuhr, "asr", timings.Asr, "maghrib", timings.Maghrib, "isha", timings.Isha, dayOfMonth);
       });
       var fajrTime = timings["Fajr"].replace(" (NZDT)", "");
       var maghribTime = timings["Maghrib"].replace(" (NZDT)", "");
@@ -214,7 +214,7 @@ function getPrayerTimes() {
       });
       //add current hijri dates to top right and english dates
       var currentHijriDay = data.data[dayOfMonth].date.hijri.day;
-      document.getElementById("current-hijri-day").innerHTML = currentHijriDay;
+      document.getElementById("current-hijri-day").innerHTML = currentHijriDay - 2;//adjust this to fix hijri date issue
       var currentHijriMonth = data.data[dayOfMonth].date.hijri.month.en;
       document.getElementById("current-hijri-month").innerHTML =
         currentHijriMonth;
@@ -272,9 +272,11 @@ function modifyNextPrayer() {
   if (nextPrayerTime == "") {
     nextPrayerTime = "Fajr";
   }
-  // console.log(`Next closest prayer time is ${nextPrayerTime}`);
+  console.log(`Next closest prayer time is ${nextPrayerTime}`);
   const nextPrayerClass = document.getElementById(nextPrayerTime + "Container");
+  console.log(nextPrayerClass);
   nextPrayerClass.classList.add("next-prayer");
+
 
 
 

@@ -75,7 +75,7 @@ select:hover {
     0px 0px 10px 5px rgba(0, 140, 41, 0.1);
 }
 
-.main-container-fajr {
+/* .main-container-fajr {
   filter: hue-rotate(-20deg) saturate(150%);
 }
 .main-container-fajr .prayer-times,
@@ -127,7 +127,7 @@ select:hover {
 .main-container-isha .top-current-date-container,
 .main-container-isha .location-method-container {
   filter: hue-rotate(150deg) saturate(100%);
-}
+} */
 
 .main-container,
 .second-main-container,
@@ -416,12 +416,13 @@ select:hover {
   background-color: white;
   border-radius: var(--border-radius);
   gap: 1rem;
-  padding: 3rem 0;
+  padding: 1.5rem 0;
 }
-.prayer-times-containers p:nth-child(1) {
+.prayer-times-containers p:nth-child(2) {
   font-size: 1.5rem;
   font-weight: bolder;
 }
+
 
 .modal-container {
   display: flex;
@@ -587,6 +588,12 @@ button:focus {
     line-height: 5rem;
     font-size: 4rem;
   }
+  .prayer-times-containers{
+    padding: inherit;
+  }
+  .location-method-container{
+    padding-bottom:1rem;
+  }
 }
 
 /* @media screen and (max-width: 758px) {
@@ -638,9 +645,7 @@ button:focus {
     height:auto !important;
     scroll-margin-top:0;
   }
-  section:nth-child(2){
-    height: inherit !important;
-  }
+ 
   .everything-container{
     margin:0;
     padding: 5rem 0rem;
@@ -667,13 +672,16 @@ button:focus {
     height: 80vh;
     border-radius: 0;
   }
+  .second-main-container{
+    grid-template-rows: none;
+  }
   .dua2, .dua3, .dua4, .dua5 {
     grid-column: 1 / 5;
     flex-direction: row;
     align-items:center;
   }
   .prayertime-date-dua{
-    font-size:3rem;
+    font-size:2rem;
   }
 
   .fourth-main-container {
@@ -687,27 +695,25 @@ button:focus {
   }
 
   .dua2 p, .dua3 p, .dua4 p, .dua5 p {
-    flex: 1 1 0;
+    flex: 1 1 100%;
     width: 0;
     min-width: 0;
+    line-height: 1.2rem;
 
 }
 .dua2 h1, .dua3 h1, .dua4 h1, .dua5 h1 {
-  flex: 0.8 1 0;
+  flex: 0.7 1 80%;
+  /* flex-basis: 80%; */
   width: 0;
     min-width: 0;
     text-align: left;
     padding-left:1rem;
+    font-size:1rem;
 }
-.dua4 h1, .dua5 h1 {
+/* .dua4 h1, .dua5 h1 {
   flex: 1.2 1 0;
-}
+} */
 
-
-  
-  .dua-content-container{
-    padding:0;
-  }
 
   .name-search-container {
     justify-content: space-around;
@@ -725,27 +731,29 @@ button:focus {
   .side-nav {
     flex-direction: row;
     align-items: center;
-    width: calc(100% - 2rem);
+    width: 100vw;
     height: 62px;
     top: auto;
-    bottom: 1rem;
+    bottom: 0rem;
+    right:0;
     z-index: 2;
     padding: 0;
     margin: 0;
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
     box-shadow: 0px 0px 10px 2px rgba(0, 140, 41, 0.1);
     gap: 0;
   }
 
   .side-nav i {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0;
   }
   .nav-buttons-holder {
     gap: 0;
-    height: 95%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     padding: 0rem;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
   }
   .main-container {
     gap: 0;
@@ -765,21 +773,49 @@ button:focus {
   }
   .prayer-times {
     grid-template-columns: repeat(1, 1fr);
-    gap: 5px;
+    padding:2rem 2rem 1rem 2rem;
+    background: linear-gradient(180deg, var(--light-green), var(--light-green));
+    border-radius: 1.4rem 1.4rem 0 0;
+    /* gap: 5px; */
   }
+  .prayer-times p{
+    font-size: 1rem !important;
+
+  }
+
   .prayer-times-containers {
     flex-direction: row;
     padding: 10px 20px;
     justify-content: space-between;
     align-items: center;
-    border-radius: var(--inner-border-radius);
+    /* border-radius: var(--inner-border-radius); */
+    border: var(--green) 1px solid;
+    background-color: var(--light-gray);
   }
+  .next-prayer{
+    background: var(--white);
+    box-shadow: inset 0px 0px 0px 1px var(--green),
+    0px 0px 5px 3px rgba(0, 140, 41, 0.1);
+  }
+  .dua-content-container{
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+  }
+  .dua-content-container:first-child{
+    padding: 1rem 1.5rem;
+
+  }
+  .dua-content-container:first-child p{
+    line-height: 1.5rem;
+  }
+
   .setting-button {
     height: inherit;
     flex-grow: 1;
+    color: var(--green);
   }
   .top-current-date-container {
-    gap: 0.5rem;
+    padding: 0 1rem;
   }
   .current-date {
     padding: 0.5rem 1rem;
