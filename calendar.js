@@ -175,7 +175,7 @@ function getPrayerTimes() {
   fetch(PrayerTime)
     .then((response) => response.json())
     .then((data) => {
-      const timings = data.data[dayOfMonth - 1].timings;
+      const timings = data.data[dayOfMonth - 3].timings;
       allTime = data;
       // console.log(data.data[dayOfMonth - 1].date);
       const times =   ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
