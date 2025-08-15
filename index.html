@@ -1,322 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="calendar.css" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/f6d300ae13.js" crossorigin="anonymous"></script>
-    <title>New Prayer Calendar</title>
-    <link rel="icon" type="image/x-icon" href="LogoGreenSVG.ico">
-  </head>
-  <body onload=" getCountry()" onscroll="getCurrentNav()">
-    <!-- ; getSavedCityAndMethod() -->
-    <div class="modal-container">
-      <div class="modal" id="modal">
-        <div class="modal-header">
-          <div class="modal-title">Settings</div>
-          <button data-close-button class="close-button">&times;</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UPSM Sports Day 2025 Results</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="UPSM Sports Day results table with automatic totals and sorting.">
+    <!-- favicon from logo.png -->
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <!-- Sahitya font for logo text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sahitya:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="container">
+        <header class="page-header">
+            <h1>UPSM Sports Day 2025 Results</h1>
+            <p class="hint">The current total score of teams from today's sports day. Please confirm results with USB officials</p>
+            <p class="hint"><strong>Scoring for each sport:</strong><br>Finals winner: 4 points. <br>Finals runner-up: 2 points. <br>Finals 3rd position: 1 point.</p>
+
+        </header>
+        <div class="update-info" aria-live="polite">
+            <span id="last-updated">Last updated: —</span>
         </div>
-        <div class="modal-body">
-          <!-- change method -->
-          <label>
-            <strong>Method of time calculation:</strong>
-          </label>
-          <br>
-          <select class="minimal-method" id="method-select" default onfocus="getMethod()">
-            <option value="1">University of Islamic Sciences, Karachi</option>
-            <option value="2" >Islamic Society of North America</option>
-            <option value="3" selected>Muslim World League - (Default)</option>
-            <option value="4">Umm Al-Qura University, Makkah</option>
-            <option value="5">Egyptian General Authority of Survey</option>
-            <option value="7">Institute of Geophysics, University of Tehran</option>
-            
-            <!-- <option value="7">Shia Ithna-Ashari, Leva Institute, Qum</option> -->
-            <!-- <option value="8">Gulf Region</option> -->
-            <!-- <option value="9">Kuwait</option>
-            <option value="10">Qatar</option> -->
-            <option value="11">Majlis Ugama Islam Singapura, Singapore</option>
-            <!-- <option value="12">Union Organization islamic de France</option>
-            <option value="13">Diyanet İşleri Başkanlığı, Turkey</option>
-            <option value="14">Spiritual Administration of Muslims of Russia</option> -->
-            <option value="15">Moonsighting Committee</option>
-          </select>
-          <br>
-          <br> Abdurrahman Obaidullah © 2024
+        <div class="table-wrap">
+            <table id="results-table" aria-describedby="table-help">
+                <thead>
+                    <tr>
+                        <th scope="col">Team</th>
+                        <th scope="col">Netball</th>
+                        <th scope="col">Volleyball</th>
+                        <th scope="col">Futsal</th>
+                        <th scope="col">Rugby</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Update these score numbers in index.html; the page will total and sort on load -->
+                    <tr data-team="Grey">
+                        <th scope="row" class="team">MBBS1</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for MBBS1">0</td>
+                    </tr>
+                    <tr data-team="Blue">
+                        <th scope="row" class="team">MBBS2</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for MBBS2">0</td>
+                    </tr>
+                    <tr data-team="Pink">
+                        <th scope="row" class="team">MBBS3</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for MBBS3">0</td>
+                    </tr>
+                    <tr data-team="Black">
+                        <th scope="row" class="team">MBBS5</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for MBBS5">0</td>
+                    </tr>
+                    <tr data-team="Green">
+                        <th scope="row" class="team">PBHC</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for PBH">0</td>
+                    </tr>
+                    <tr data-team="Red">
+                        <th scope="row" class="team">Nursing Saweni</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for Nursing Saweni">0</td>
+                    </tr>
+                    <tr data-team="Yellow">
+                        <th scope="row" class="team">Nursing Samabula</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for Nursing Samabula">0</td>
+                    </tr>
+                    <tr data-team="Maroon">
+                        <th scope="row" class="team">BMHS</th>
+                        <td class="score" data-label="Netball">0</td>
+                        <td class="score" data-label="Volleyball">0</td>
+                        <td class="score" data-label="Futsal">0</td>
+                        <td class="score" data-label="Rugby">0</td>
+                        <td class="total" data-label="Total" aria-label="Total for BMHS">0</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p id="table-help" class="sr-only">Update scores in the HTML file. Totals update on page load and rows are sorted by total score (highest first).</p>
         </div>
-      </div>
-    </div>
-    <div id="modalOverlay"></div>
-    <div class="name-search-container">
-      <p class="page-name"> Prayer</p>
-      <div class="search-bar-container" >
-        <div class="choose-city">
-          <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown()"  id="myInput" onkeyup="filterFunction()" />
-          <div id="myDropdown" class="dropdown-content" >
-            <a>Auckland</a>
-            <a>Christchurch</a>
-            <a>Dunedin</a>
-            <a>Hamilton</a>
-            <a>Napier</a>
-            <a>Nelson</a>
-            <a>Palmerston North</a>
-            <a>Tauranga</a>
-            <a>Wellington</a>
-            <!-- <a>Nadi (Not working!)</a> -->
-          </div>
-        </div>
-        <a class="search-icon">
-          <i class="fa-solid fa-location-crosshairs"></i>
-        </a>
-      </div>
-    </div>
-    <div class="everything-container" onclick="hideDropdown()">
-      <div>
-        <div class="side-nav">
-          <div id="mainContainerNav" class="nav-buttons-holder" style="cursor: pointer" onclick="window.location='#mainContainer';">
-            <i class="fa-solid fa-kaaba"></i>
-            <a class="nav-buttons-text" style="text-decoration: none">
-              <a>Prayer</a>
-            </a>
-          </div>
-          <div id="secondMainContainerNav" class="nav-buttons-holder" style="cursor: pointer" onclick="window.location='#secondMainContainer';">
-            <i class="fa-solid fa-cloud-moon"></i>
-            <a class="nav-buttons-text" href="#">
-              <a>Dua</a>
-            </a>
-          </div>
-          <div id="thirdMainContainerNav" class="nav-buttons-holder" style="cursor: pointer" onclick="window.location='#thirdMainContainer';">
-            <i class="fa-solid fa-calendar-days"></i>
-            <a class="nav-buttons-text" href="#">
-              <a>Calendar</a>
-            </a>
-          </div>
-          <div id="fourthMainContainerNav" class="nav-buttons-holder" style="cursor: pointer" onclick="window.location='#fourthMainContainer';">
-            <i class="fa-solid fa-book-quran"></i>
-            <a class="nav-buttons-text" href="#">
-              <a>Halal</a>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div>
-        
-        <div id="container">
-          <section id="mainContainer" class="main-container">
-            <div class="top-current-date-container">
-              <button class="setting-button" data-modal-target="#modal">Settings&nbsp;&nbsp; <i class="fa-solid fa-sliders"></i>
-              </button>
-              <a></a>
-              <a></a>
-              <div class="current-date">
-                <i class="fa-solid fa-calendar-days"></i>
-                <p class="today-text">Today</p>
-                <p id="current-hijri-day"></p>
-                <p id="current-hijri-month"></p>
-                <p id="current-hijri-year"></p>
-                <p id="current-gregorian-day"></p>
-                <p id="current-gregorian-month"></p>
-                <p id="current-gregorian-year"></p>
-              </div>
+        <br>
+        <section id="podium" class="podium" aria-label="Top 3 teams">
+            <h2 class="podium-title">The current podium standings</h2>
+            <div class="podium-grid">
+                <div class="podium-step second" data-pos="2" aria-label="2nd place"></div>
+                <div class="podium-step first" data-pos="1" aria-label="1st place"></div>
+                <div class="podium-step third" data-pos="3" aria-label="3rd place"></div>
             </div>
-    
-            <div class="location-method-container">
-              <img class="center-image-mosque" src="background-removed.png">
-              <strong>
-                <p id="current-location">Prayer times</p>
-              </strong>
-              <p id="method-display">Method</p>
-              <!-- <p class="method-details">Fajr is 15 degrees & Isha is 15 degrees.</p> -->
+        </section>
+        <section class="logo">
+            <div class="text-container">
+                <div class="logo-img">
+                    <img src="logo.png" alt="UPSM Logo">
+                </div>
+                <p class="logo-text">Umanand Prasad School of Medicine & Health Science</p>
             </div>
-            <div class="prayer-times">
-              <div class="prayer-times-containers" id="FajrContainer">
-                <p class="fajr-name">Fajr</p>
-                <p id="fajr-time">00:00</p>
-              </div>
-              <div class="prayer-times-containers" id="SunriseContainer">
-                <p class="sunrise-name">Sunrise</p>
-                <p id="sunrise-time">00:00</p>
-              </div>
-              <div class="prayer-times-containers" id="DhuhrContainer">
-                <p class="dhuhr-name">Dhuhr</p>
-                <p id="dhuhr-time">00:00</p>
-              </div>
-              <div class="prayer-times-containers" id="AsrContainer">
-                <p class="asr-name">Asr</p>
-                <p id="asr-time">00:00</p>
-              </div>
-              <div class="prayer-times-containers grid-col-span-2" id="MaghribContainer">
-                <p class="maghrib-name">Maghrib</p>
-                <p id="maghrib-time">00:00</p>
-              </div>
-              <div class="prayer-times-containers grid-col-span-2" id="IshaContainer">
-                <p class="isha-name">Isha</p>
-                <p id="isha-time">00:00</p>
-              </div>
-            </div>
-          </section>
-          <section id="secondMainContainer" class="second-main-container">
-            <!-- <h1>Dua & Hadith to help you through out the day!</h1> -->
-            <div class="dua-content-container dua1">
-              <h1>Dua for breaking fast.</h1>
-              <br>
-              <p>ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ </p>
-              <p>
-                <i>Dhahaba al-zama’ wa abtalat al-‘urooq wa thabata al-ajr in sha Allaah </i>
-              </p>
-              <p>Thirst is gone, the veins are moistened and the reward is certain if Allaah wills.</p>
-            </div>
-            <div class="dua-content-container dua2">
-              <h1>Fajr</h1>
-              <p id="fajrTimeDua" class="prayertime-date-dua">00:00</p>
-              <p id="timeTillFajr">0 hrs & 0 mins left</p>
-            </div>
-            <div class="dua-content-container dua3">
-              <h1>Maghrib</h1>
-              <p id="maghribTimeDua" class="prayertime-date-dua">00:00</p>
-              <p id="timeTillMaghrib">0 hrs & 0 mins left</p>
-            </div>
-            <div class="dua-content-container dua4">
-              <h1>Hijri Date</h1>
-              <p id="hijri-day-dua" class="prayertime-date-dua">00</p>
-              <p id="hijiri-month-year-dua">Hijri Year</p>
-            </div>
-            <div class="dua-content-container dua5">
-              <h1>English Date</h1>
-              <p id="current-day-dua" class="prayertime-date-dua">00</p>
-              <p id="current-month-year-dua">Gregorian Year</p>
-            </div>
-          </section>
-          <section id="thirdMainContainer" class="third-main-container">
-            <h1>The calendar and prayer times to help you plan ahead! </h1>
-            <br>
-            <h3>Also coming very soon...</h3>
-            <br>
-            <br>
-            <!-- <table>
-              <thead>
-                <tr>
-                  <td></td>
-                  <td>Monday</td>
-                  <td>Tuesday</td>
-                  <td>Wednesday</td>
-                  <td>Thursday</td>
-                  <td>Friday</td>
-                  <td>Saturday</td>
-                  <td>Sunday</td>
-                </tr>
-              </thead>
-              <tr>
-                <td class="table-prayer-name">
-                  <p>Fajr</p>
-                  <p>Sunrise</p>
-                  <p>Dhuhr</p>
-                  <p>Asr</p>
-                  <p>Maghrib</p>
-                  <p>Isha</p>
-                </td>
-                <td>
-                  <div class="table-date-time">
-                    <div class="table-prayer-date">1</div>
-                    <div class="table-prayer-times">
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="table-date-time">
-                    <div class="table-prayer-date">2</div>
-                    <div class="table-prayer-times">
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="table-date-time">
-                    <div class="table-prayer-date">2</div>
-                    <div class="table-prayer-times">
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="table-date-time">
-                    <div class="table-prayer-date">28</div>
-                    <div class="table-prayer-times">
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="table-date-time">
-                    <div class="table-prayer-date">5</div>
-                    <div class="table-prayer-times">
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="table-date-time">
-                    <div class="table-prayer-date">6</div>
-                    <div class="table-prayer-times">
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <div class="table-date-time">
-                    <div class="table-prayer-date">28</div>
-                    <div class="table-prayer-times">
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                      <div>5:00</div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </table> -->
-          </section>
-          <section id="fourthMainContainer" class="fourth-main-container">
-            <h1>Directory of Halal places to eat and products! </h1>
-            <br>
-            <h3>Once again, also coming very soon...</h3>
-          </section>
-        </div>
-      </div>
-    </div>
-    <script src="calendar.js"></script>
-  </body>
+
+        </section>
+        <footer class="site-footer" role="contentinfo">
+            <p>© <span id="copyright-year">2025</span> <a href="https://www.instagram.com/abdupix/" target="_blank" rel="noopener noreferrer">AbduPix</a></p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
 </html>
