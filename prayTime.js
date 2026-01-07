@@ -155,11 +155,17 @@ class PrayTime {
 
         let nextKey = null;
         let nextTime = null;
-        for (const key of order) {
+        let lastKey = null;
+        let lastTime = null;
+        let nextIndex = -1;
+
+        for (let i = 0; i < order.length; i++) {
+            const key = order[i];
             const t = rawTimes[key];
             if (!isNaN(t) && t >= now) {
                 nextKey = key;
                 nextTime = t;
+                nextIndex = i;
                 break;
             }
         }
@@ -167,6 +173,32 @@ class PrayTime {
         if (!nextKey) {
             nextKey = 'fajr';
             nextTime = rawTimes.fajr + 86400000; // fallback to tomorrow's Fajr
+            nextIndex = 0;
+        }
+
+        // Find the last prayer (previous prayer that has passed)
+        if (nextIndex > 0) {
+            // Previous prayer is the one before next prayer
+            lastKey = order[nextIndex - 1];
+            lastTime = rawTimes[lastKey];
+        } else {
+            // Current time is before first prayer, so last prayer is yesterday's last prayer (Isha)
+            lastKey = 'isha';
+            lastTime = rawTimes.isha - 86400000; // yesterday's Isha
+        }
+
+        // Calculate progress percentage between last and next prayer
+        const totalDuration = nextTime - lastTime;
+        const elapsedTime = now - lastTime;
+        const progressPercentage = Math.max(0, Math.min(100, (elapsedTime / totalDuration) * 100));
+
+        console.log('Last Prayer:', lastKey, 'at', this.formatTime(lastTime));
+        console.log('Progress:', progressPercentage.toFixed(1) + '%');
+
+        // Update circular progress bar
+        const countdownBorder = document.getElementById('timeTillNextPrayerText')?.parentElement;
+        if (countdownBorder) {
+            countdownBorder.style.setProperty('--progress', progressPercentage);
         }
 
         // Log today's dates in both calendars using configured timezone
