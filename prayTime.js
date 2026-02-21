@@ -265,7 +265,18 @@ class PrayTime {
             );
             const nextPrayerElement = document.getElementById('timeTillNextPrayerText');
             if (nextPrayerElement) {
-                nextPrayerElement.innerHTML = `Next Prayer: <br> <h2>${label} in </h2> <h1> ${timeLeft} </h1>`;
+                nextPrayerElement.innerHTML = `Next Prayer: <br> <h2>${label} in ${timeLeft}</h2>`;
+            }
+
+            // Update linear countdown for mobile
+            const nextPrayerElementLinear = document.getElementById('timeTillNextPrayerTextLinear');
+            if (nextPrayerElementLinear) {
+                nextPrayerElementLinear.innerHTML = `Next Prayer: ${label}`;
+            }
+
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.width = progressPercentage + '%';
             }
 
 

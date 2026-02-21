@@ -9,48 +9,57 @@
     <title>New Prayer Calendar</title>
     <link rel="icon" type="image/x-icon" href="LogoGreenSVG.ico">
   </head>
-  <body onload=" getCountry()" onscroll="getCurrentNav()">
+  <body onload="initializeSettings()" onscroll="getCurrentNav()">
     <!-- ; getSavedCityAndMethod() -->
     <div class="modal-container">
       <div class="modal" id="modal">
         <div class="modal-header">
-          <div class="modal-title">Settings</div>
+          <div class="modal-title">⚙️ Settings</div>
           <button data-close-button class="close-button">&times;</button>
         </div>
         <div class="modal-body">
-          <!-- change method -->
-          <label>
-            <strong>Method of time calculation:</strong>
-          </label>
-          <br>
-          <select class="minimal-method" id="method-select" default onfocus="getMethod()">
-            <option value="1">University of Islamic Sciences, Karachi</option>
-            <option value="2" >Islamic Society of North America</option>
-            <option value="3" selected>Muslim World League - (Default)</option>
-            <option value="4">Umm Al-Qura University, Makkah</option>
-            <option value="5">Egyptian General Authority of Survey</option>
-            <option value="7">Institute of Geophysics, University of Tehran</option>
-            
-            <!-- <option value="7">Shia Ithna-Ashari, Leva Institute, Qum</option> -->
-            <!-- <option value="8">Gulf Region</option> -->
-            <!-- <option value="9">Kuwait</option>
-            <option value="10">Qatar</option> -->
-            <option value="11">Majlis Ugama Islam Singapura, Singapore</option>
-            <!-- <option value="12">Union Organization islamic de France</option>
-            <option value="13">Diyanet İşleri Başkanlığı, Turkey</option>
-            <option value="14">Spiritual Administration of Muslims of Russia</option> -->
-            <option value="15">Moonsighting Committee</option>
-          </select>
-          <br><br>
-          <label>Choose country:</label>
-          <br>
-          <select class="minimal-country" id="country-select" onchange="countryChange()">
-            <option value="New Zealand" selected>New Zealand</option>
-            <option value="Fiji">Fiji</option>
-            <option value="Australia">Australia</option>
-          </select>
-          <br><br>
-          <br> Abdurrahman Obaidullah © 2024
+          <!-- method selection -->
+          <div>
+            <label for="method-select">
+              <strong>Calculation Method</strong>
+            </label>
+            <select id="method-select" onchange="handleMethodChange()">
+              <option value="1">University of Islamic Sciences, Karachi</option>
+              <option value="2">Islamic Society of North America</option>
+              <option value="3" selected>Muslim World League (Default)</option>
+              <option value="4">Umm Al-Qura University, Makkah</option>
+              <option value="5">Egyptian General Authority of Survey</option>
+              <option value="7">Institute of Geophysics, University of Tehran</option>
+              <option value="11">Majlis Ugama Islam Singapura, Singapore</option>
+              <option value="15">Moonsighting Committee</option>
+            </select>
+          </div>
+
+          <!-- country selection -->
+          <div>
+            <label for="country-select">
+              <strong>Country</strong>
+            </label>
+            <select id="country-select" onchange="countryChange()">
+              <option value="New Zealand" selected>New Zealand</option>
+              <option value="Fiji">Fiji</option>
+              <option value="Australia">Australia</option>
+            </select>
+          </div>
+
+          <!-- city selection -->
+          <div>
+            <label for="city-select">
+              <strong>City</strong>
+            </label>
+            <select id="city-select" onchange="handleCityChange()">
+              <option value="">Select a city</option>
+            </select>
+          </div>
+
+          <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px solid rgba(0, 140, 41, 0.2); text-align: center; font-size: 0.85rem; color: var(--gray);">
+            © 2024 Abdurrahman Obaidullah
+          </div>
         </div>
       </div>
     </div>
@@ -61,17 +70,6 @@
         <div class="choose-city">
           <input type="text" autocomplete="off" class="search-bar" placeholder="Search for a city" onFocus="cityDropDown()"  id="myInput" onkeyup="filterFunction()" />
           <div id="myDropdown" class="dropdown-content" >
-            <a>Auckland</a>
-            <a>Christchurch</a>
-            <a>Dunedin</a>
-            <a>Hamilton</a>
-            <a>Napier</a>
-            <a>Nelson</a>
-            <a>Palmerston North</a>
-            <a>Tauranga</a>
-            <a>Wellington</a>
-            <a>Gore</a>
-            <!-- <a>Nadi (Not working!)</a> -->
           </div>
         </div>
         <a class="search-icon">
@@ -116,7 +114,7 @@
         <div id="container">
           <section id="mainContainer" class="main-container">
             <div class="time-masjid">
-              <div class="masjid-name" ><i class="fa-solid fa-star-and-crescent"></i> Masjid Muhammadi</div>
+              <div class="masjid-name" id="locationDisplay"><i class="fa-solid fa-location-dot"></i> <span id="currentLocationName">Loading...</span></div>
               <hr>
               <div id="currentTime" class="current-time"><p></p></div>
               <div class="top-current-date-container">
@@ -132,6 +130,11 @@
             <div class="time-till-next-prayer">
               <div class="time-till-countdown-border">
               <p id="timeTillNextPrayerText">0 hrs & 0 mins left</p>
+              </div>
+              <div class="time-till-countdown-linear">
+                <div class="progress-bar-container">
+                  <div id="progressBar" class="progress-bar"></div>
+                </div>
               </div>
             </div>
     
@@ -242,7 +245,22 @@
       <script src="prayTime.js"></script>
       <script>
     const praytime = new PrayTime();
-    praytime.getTimes();
+    const refreshTimes = () => praytime.getTimes();
+
+    // Initial render
+    refreshTimes();
+
+    // Re-sync to the top of each minute, then update every minute
+    const scheduleMinuteUpdates = () => {
+      const now = Date.now();
+      const msToNextMinute = 60000 - (now % 60000);
+      setTimeout(() => {
+        refreshTimes();
+        setInterval(refreshTimes, 60000);
+      }, msToNextMinute);
+    };
+
+    scheduleMinuteUpdates();
 </script>
     <!-- <script src="maps.js"></script>
    <script src="tracker.js"></script> -->
